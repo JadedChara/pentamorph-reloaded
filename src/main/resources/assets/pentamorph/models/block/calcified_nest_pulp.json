@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "pentamorph:block/calcified_nest_pulp"
+  }
+}
