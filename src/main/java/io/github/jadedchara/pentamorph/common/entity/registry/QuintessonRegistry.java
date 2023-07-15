@@ -25,5 +25,11 @@ public class QuintessonRegistry {
 	}
 	//Entities
 	public static final EntityType<QuintessonLarva> QUINTESSON_LARVA = generate("quintesson_larva",
-			QuiltEntityTypeBuilder.createMob().entityFactory(QuintessonLarva::new).defaultAttributes(QuintessonLarva.createAttributes()).setDimensions(EntityDimensions.changing(0.5f,0.3f)).build());
+			QuiltEntityTypeBuilder.createMob().entityFactory(QuintessonLarva::new).defaultAttributes(QuintessonLarva
+			.createAttributes()).setDimensions(EntityDimensions.changing(0.5f,0.3f)).build());
+	/*public static final EntityType<QuintessonJuror> QUINTESSON_JUROR = generate("quintesson_juror",
+			QuiltEntityTypeBuilder.createMob().entityFactory(QuintessonJuror::new).defaultAttributes(QuintessonJuror
+					.createAttributes()).setDimensions(EntityDimensions.changing(0.5f,0.3f)).build());*/
+
+
 }

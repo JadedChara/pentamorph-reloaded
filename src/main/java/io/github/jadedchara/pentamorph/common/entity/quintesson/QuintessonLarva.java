@@ -1,13 +1,18 @@
 package io.github.jadedchara.pentamorph.common.entity.quintesson;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -21,8 +26,31 @@ public class QuintessonLarva extends PathAwareEntity implements IAnimatable {
 	protected void initDataTracker(){
 		super.initDataTracker();
 	}
+	@Override
+	protected void initGoals(){
+		this.goalSelector.add(1, new WanderAroundGoal(this,1.0F));
+		this.goalSelector.add(2,new LookAroundGoal(this));
+		this.goalSelector.add(3, new TargetGoal<>(this, ChickenEntity.class, true));
+		this.goalSelector.add(4,new LookAtEntityGoal(this, PlayerEntity.class,1.0F));
+		this.goalSelector.add(5, new SwimGoal(this));
+		//this.goalSelector.add(6, new);
+	}
+
 	//modify this one
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+		if (this.isAttacking()){
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.quintlarva.scramble",
+					ILoopType.EDefaultLoopTypes.LOOP));
+			return PlayState.CONTINUE;
+		}else if(event.isMoving()){
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.quintlarva.walk",
+					ILoopType.EDefaultLoopTypes.LOOP));
+			return PlayState.CONTINUE;
+		}else if(this.isAlive()){
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.quintlarva.idle",
+					ILoopType.EDefaultLoopTypes.LOOP));
+			return PlayState.CONTINUE;
+		}
 		return PlayState.STOP;
 	}
 	@Override
