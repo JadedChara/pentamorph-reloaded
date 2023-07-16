@@ -19,7 +19,8 @@
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"init": "io.github.jadedchara.pentamorph.Pentamorph"
+			"init": "io.github.jadedchara.pentamorph.Pentamorph",
+			"client_init": "io.github.jadedchara.pentamorph.client.PentamorphClient"
 		},
 		"depends": [
 			{

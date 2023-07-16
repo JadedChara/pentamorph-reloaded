@@ -72,6 +72,7 @@ public class QuintessonLarva extends PathAwareEntity implements IAnimatable {
 	}
 	//start config
 	public QuintessonLarva(EntityType<? extends PathAwareEntity> type, World world){
-		super(type,world);;
+		super(type,world);
+
 	}
 }
