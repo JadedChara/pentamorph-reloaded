@@ -8,7 +8,7 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class QuintessonLarvaModel extends AnimatedGeoModel<QuintessonLarva> {
 	private static final Identifier MODEL = new Identifier(Pentamorph.MOD_ID,"geo/entity/quint/quintlarva.geo.json");
-	private static final Identifier ANIMATION = new Identifier(Pentamorph.MOD_ID,"anim/entity/quint/quintlarva" +
+	private static final Identifier ANIMATION = new Identifier(Pentamorph.MOD_ID,"animations/entity/quint/quintlarva" +
 			".animation.json");
 	private static final Identifier TEXTURE = new Identifier(Pentamorph.MOD_ID,"textures/entity/quint/quintlarva.png");
 	@Override

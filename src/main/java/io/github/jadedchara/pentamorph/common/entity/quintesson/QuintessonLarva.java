@@ -19,6 +19,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
+
 public class QuintessonLarva extends PathAwareEntity implements IAnimatable {
 	//basic pre-config
 	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
@@ -28,21 +29,24 @@ public class QuintessonLarva extends PathAwareEntity implements IAnimatable {
 	}
 	@Override
 	protected void initGoals(){
-		this.goalSelector.add(1, new WanderAroundGoal(this,1.0F));
+		this.goalSelector.add(3, new WanderAroundGoal(this,1.0F));
 		this.goalSelector.add(2,new LookAroundGoal(this));
-		this.goalSelector.add(3, new TargetGoal<>(this, ChickenEntity.class, true));
+		this.goalSelector.add(1, new TargetGoal<>(this, ChickenEntity.class, true, true));
 		this.goalSelector.add(4,new LookAtEntityGoal(this, PlayerEntity.class,1.0F));
 		this.goalSelector.add(5, new SwimGoal(this));
+		this.goalSelector.add(1, new MeleeAttackGoal(this, 5.0F, false));
 		//this.goalSelector.add(6, new);
 	}
 
 	//modify this one
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.isAttacking()){
+			System.out.println("IsAttacking = true!");
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.quintlarva.scramble",
 					ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}else if(event.isMoving()){
+			System.out.println("IsMoving = true!");
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.quintlarva.walk",
 					ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
@@ -66,8 +70,8 @@ public class QuintessonLarva extends PathAwareEntity implements IAnimatable {
 	public static DefaultAttributeContainer.Builder createAttributes(){
 		return MobEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1f)
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.1)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1D)
+				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 40.0)
 				;
 	}
 	//start config
