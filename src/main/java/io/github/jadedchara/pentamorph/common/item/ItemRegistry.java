@@ -4,9 +4,9 @@ import io.github.jadedchara.pentamorph.Pentamorph;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ItemRegistry {
 		//
 	}
 	public static <T extends Item> void registerItem(T item, String name, ItemGroup... groups) {
-		Registry.register(Registry.ITEM, Pentamorph.id(name), item);
+		Registry.register(Registries.ITEM, Pentamorph.id(name), item);
 
 		//for (ItemGroup group : groups) {
 		//	itemsByGroup.computeIfAbsent(group., g -> new ArrayList<>()).add(item);

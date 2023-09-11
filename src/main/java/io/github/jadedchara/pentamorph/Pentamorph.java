@@ -8,7 +8,9 @@ import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import software.bernie.geckolib3.GeckoLib;
+import software.bernie.geckolib.GeckoLib;
+
+
 
 public class Pentamorph implements ModInitializer {
 	// This logger is used to write text to the console and the log file.

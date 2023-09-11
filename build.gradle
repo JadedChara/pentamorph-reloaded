@@ -37,8 +37,9 @@ dependencies {
 	// Quilted Fabric API will automatically pull in the correct QSL version.
 	modImplementation libs.quilted.fabric.api
 	// modImplementation "org.quiltmc:qsl:qsl:3.0.0-beta.29+1.19.2"
-	modImplementation ('software.bernie.geckolib:geckolib-quilt-1.19:3.1.41'){
-		exclude(group: "org.quiltmc")
+	modImplementation ('software.bernie.geckolib:geckolib-fabric-1.20.1:4.2.2'){
+		exclude group: "net.fabricmc"
+		exclude group: "net.fabricmc.fabric-api"
 	}
 	// modImplementation libs.bundles.quilted.fabric.api // If you wish to use Fabric API's deprecated modules, you can replace the above line with this one
 

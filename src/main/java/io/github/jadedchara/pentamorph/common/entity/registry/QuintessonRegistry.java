@@ -5,8 +5,9 @@ import io.github.jadedchara.pentamorph.common.entity.quintesson.QuintessonLarva;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.quiltmc.qsl.entity.api.QuiltEntityTypeBuilder;
 
 import java.util.LinkedHashMap;
@@ -20,7 +21,7 @@ public class QuintessonRegistry {
 	}
 	public static void init(){
 		QUINTESSONS.keySet().forEach(entityType -> {
-			Registry.register(Registry.ENTITY_TYPE, QUINTESSONS.get(entityType),entityType);
+			Registry.register(Registries.ENTITY_TYPE, QUINTESSONS.get(entityType),entityType);
 		});
 	}
 	//Entities

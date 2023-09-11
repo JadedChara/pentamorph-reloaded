@@ -9,20 +9,19 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
+
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 
-public class QuintessonLarva extends PathAwareEntity implements IAnimatable {
+
+public class QuintessonLarva extends PathAwareEntity implements GeoEntity {
 	//basic pre-config
-	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	@Override
 	protected void initDataTracker(){
 		super.initDataTracker();
@@ -39,44 +38,38 @@ public class QuintessonLarva extends PathAwareEntity implements IAnimatable {
 	}
 
 	//modify this one
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if (this.isAttacking()){
-			System.out.println("IsAttacking = true!");
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.quintlarva.scramble",
-					ILoopType.EDefaultLoopTypes.LOOP));
-			return PlayState.CONTINUE;
-		}else if(event.isMoving()){
-			System.out.println("IsMoving = true!");
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.quintlarva.walk",
-					ILoopType.EDefaultLoopTypes.LOOP));
-			return PlayState.CONTINUE;
-		}else if(this.isAlive()){
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.quintlarva.idle",
-					ILoopType.EDefaultLoopTypes.LOOP));
-			return PlayState.CONTINUE;
-		}
-		return PlayState.STOP;
+
+	private static final RawAnimation WALK = RawAnimation.begin().thenPlay("animation.quintlarva.walk");
+	private static final RawAnimation IDLE = RawAnimation.begin().thenPlay("animation.quintlarva.idle");
+
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
+		data.add(new AnimationController<>(this, "controller", 2, state ->{
+			if (state.isMoving()){
+				return state.setAndContinue(WALK);
+			}else {
+				return state.setAndContinue(IDLE);
+			}
+		}));
 	}
 	@Override
-	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController(this, "controller", 0, this::predicate));
-	}
-	@Override
-	public AnimationFactory getFactory() {
-		return this.factory;
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return this.cache;
 	}
 
 	//modify this one...
 	public static DefaultAttributeContainer.Builder createAttributes(){
-		return MobEntity.createMobAttributes()
+		return MobEntity.createAttributes()
 				.add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
 				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1D)
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 40.0)
 				;
+
 	}
 	//start config
 	public QuintessonLarva(EntityType<? extends PathAwareEntity> type, World world){
 		super(type,world);
 
 	}
+
 }
