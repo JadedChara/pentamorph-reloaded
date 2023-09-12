@@ -4,10 +4,13 @@
 	"package": "io.github.jadedchara.pentamorph.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-        "ChickenMixin"
+        "ChickenMixin",
+        "PlayerEntityMixin"
     ],
 	"client": [
-		"TitleScreenMixin"
+		"TitleScreenMixin",
+        "client.PlayerEntityRendererMixin",
+        "client.PlayerRenderAccess"
 	],
 	"injectors": {
 		"defaultRequire": 1

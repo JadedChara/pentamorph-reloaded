@@ -3,7 +3,7 @@
 	"quilt_loader": {
 		"group": "io.github.jadedchara",
 		"id": "pentamorph",
-		"version": "0.01",
+		"version": "0.0.6",
 		"metadata": {
 			"name": "Pentamorph",
 			"description": "A beginning Transformers mod with a particular focus on Quintessons.",
@@ -12,8 +12,8 @@
 			},
 			"contact": {
 				"homepage": "https://nightstrike.wixsite.com/terminus-industries/",
-				"issues": "",
-				"sources": ""
+				"issues": "https://github.com/JadedChara/pentamorph-reloaded/issues",
+				"sources": "https://github.com/JadedChara/pentamorph-reloaded/"
 			},
 			"icon": "assets/pentamorph/icon.png"
 		},

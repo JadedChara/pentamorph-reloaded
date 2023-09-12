@@ -1,6 +1,6 @@
 package io.github.jadedchara.pentamorph.client.render.quintesson;
 
-import io.github.jadedchara.pentamorph.client.model.QuintessonLarvaModel;
+import io.github.jadedchara.pentamorph.client.model.quintesson.QuintessonLarvaModel;
 import io.github.jadedchara.pentamorph.common.entity.quintesson.QuintessonLarva;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;

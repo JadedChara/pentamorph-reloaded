@@ -26,6 +26,9 @@ public class Pentamorph implements ModInitializer {
 		GeckoLib.initialize();
 		BlockRegistry.init();
 		EntityRegistry.init();
+		//TabRegistry.init();
+		//ItemRegistry.init();
+		//RoleRegistry.init();
 		LOGGER.info("Hello Quilt world from {}!", mod.metadata().name());
 	}
 }
