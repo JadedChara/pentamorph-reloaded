@@ -1,10 +1,10 @@
 package io.github.jadedchara.pentamorph.mixin.client;
 
-import com.mojang.authlib.legacy.LegacyMinecraftSessionService;
+import io.github.jadedchara.pentamorph.client.model.rpg.GeoReplacedPlayerModel;
 import io.github.jadedchara.pentamorph.client.render.rpg.GeoReplacedPlayerRenderer;
-import io.github.jadedchara.pentamorph.common.util.GeoReplacedPlayer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import io.github.jadedchara.pentamorph.common.SubcomponentRegistry;
+import io.github.jadedchara.pentamorph.mixin.PlayerEntityMixin;
+import io.github.jadedchara.pentamorph.mixin.client.PlayerRenderAccess;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -16,8 +16,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
 
 //@Environment(EnvType.CLIENT)
 @Mixin(PlayerEntityRenderer.class)
@@ -36,19 +34,31 @@ public class PlayerEntityRendererMixin<T extends PlayerEntity> {
 			CallbackInfo ci)
 	{
 		GeoReplacedPlayerRenderer geoPlayerRenderer = this.getGeoPlayerRenderer();
+
 		if(geoPlayerRenderer == null){
 			return;
 		}
-		geoPlayerRenderer.render(abstractClientPlayerEntity, f, g, matrixStack, vertexConsumerProvider, i);
-		ci.cancel();
+
+		String chaCheck = SubcomponentRegistry.getProvidedCharacter(abstractClientPlayerEntity);
+
+		if(chaCheck == "quintlarva"){
+			geoPlayerRenderer.render(abstractClientPlayerEntity, f, g, matrixStack, vertexConsumerProvider, i);
+			ci.cancel();
+		}
+
+		//ci.cancel();
 	}
+
+
 	public GeoReplacedPlayerRenderer getGeoPlayerRenderer(){
 		EntityRenderDispatcher entityRenderDispatcher = MinecraftClient.getInstance().getEntityRenderDispatcher();
 		EntityRenderer<?> entityRenderer =
 				((PlayerRenderAccess) entityRenderDispatcher).getRenderers().get(EntityType.PLAYER);
+
 		if(!(entityRenderer instanceof GeoReplacedPlayerRenderer geoPlayerRenderer)){
 			return null;
 		}
 		return geoPlayerRenderer;
 	}
+	//public void setGeoModel(PlayerEntity player, String character){}
 }

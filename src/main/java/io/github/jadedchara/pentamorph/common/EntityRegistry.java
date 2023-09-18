@@ -1,6 +1,7 @@
 package io.github.jadedchara.pentamorph.common;
 
 import io.github.jadedchara.pentamorph.common.entity.registry.QuintessonRegistry;
+import net.minecraft.entity.player.PlayerEntity;
 
 public class EntityRegistry {
 

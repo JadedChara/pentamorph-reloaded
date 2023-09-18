@@ -12,4 +12,8 @@ import java.util.Map;
 public interface PlayerRenderAccess {
 	@Accessor
 	Map<EntityType<?>, EntityRenderer<?>> getRenderers();
+
+
+
+	//private void setRenderer(){};
 }

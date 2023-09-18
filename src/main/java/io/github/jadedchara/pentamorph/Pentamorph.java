@@ -2,6 +2,7 @@ package io.github.jadedchara.pentamorph;
 
 import io.github.jadedchara.pentamorph.common.BlockRegistry;
 import io.github.jadedchara.pentamorph.common.EntityRegistry;
+import io.github.jadedchara.pentamorph.common.SubcomponentRegistry;
 
 import net.minecraft.util.Identifier;
 import org.quiltmc.loader.api.ModContainer;
@@ -26,6 +27,7 @@ public class Pentamorph implements ModInitializer {
 		GeckoLib.initialize();
 		BlockRegistry.init();
 		EntityRegistry.init();
+		SubcomponentRegistry.init();
 		//TabRegistry.init();
 		//ItemRegistry.init();
 		//RoleRegistry.init();
