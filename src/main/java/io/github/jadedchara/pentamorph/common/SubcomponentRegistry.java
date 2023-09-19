@@ -22,6 +22,7 @@ public class SubcomponentRegistry {
 	}
 	public static void setProvidedCharacter(PlayerEntity provider, String character){
 		RPG.get(provider).setCharacter(character);
+		RPG.sync(provider);
 		//System.out.print("Character set to: [" + character + "]");
 	}
 }
