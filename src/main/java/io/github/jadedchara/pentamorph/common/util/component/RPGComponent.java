@@ -1,29 +1,28 @@
 package io.github.jadedchara.pentamorph.common.util.component;
 
-import dev.onyxstudios.cca.api.v3.component.ComponentKey;
-import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import io.github.jadedchara.pentamorph.Pentamorph;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.Identifier;
 
-public class RPGManage implements RPGEdit, AutoSyncedComponent {
-	public static final ComponentKey<RPGManage> RPG=
-			ComponentRegistry.getOrCreate(new Identifier(Pentamorph.MOD_ID,"rpg"),RPGManage.class);
-	public String cha = "player";
+public class RPGComponent implements RPGEdit, AutoSyncedComponent {
+
+	public String cha = "human";
 	public PlayerEntity provider;
+
+	public RPGComponent(PlayerEntity player){
+		this.provider=player;
+	}
 
 	public void setProvidedCharacter(PlayerEntity provider, String character) {
 		this.provider = provider;
 		this.cha = character;
-		RPG.sync(provider);
+		RPGComponentInitializer.RPG_COMPONENT.sync(provider);
 	}
 
 	//@Override
 	public static String getProvidedCharacter(PlayerEntity provider) {
 
-		return RPG.maybeGet(provider).map(RPGManage::getCurrentCharacter).orElse("human");
+		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(provider).map(RPGComponent::getCurrentCharacter).orElse("human");
 	}
 	public String getCurrentCharacter(){
 		return this.cha;

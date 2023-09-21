@@ -3,7 +3,8 @@ package io.github.jadedchara.pentamorph.mixin.client;
 import io.github.jadedchara.pentamorph.client.model.rpg.GeoReplacedPlayerModel;
 import io.github.jadedchara.pentamorph.client.render.rpg.GeoReplacedPlayerRenderer;
 import io.github.jadedchara.pentamorph.common.SubcomponentRegistry;
-import io.github.jadedchara.pentamorph.common.util.component.RPGManage;
+import io.github.jadedchara.pentamorph.common.util.component.RPGComponent;
+import io.github.jadedchara.pentamorph.common.util.component.RPGComponentInitializer;
 import io.github.jadedchara.pentamorph.mixin.PlayerEntityMixin;
 import io.github.jadedchara.pentamorph.mixin.client.PlayerRenderAccess;
 import net.minecraft.client.MinecraftClient;
@@ -41,7 +42,7 @@ public class PlayerEntityRendererMixin<T extends PlayerEntity> {
 		}
 
 		String chaCheck =
-				RPGManage.RPG.maybeGet(abstractClientPlayerEntity).map(RPGManage::getCurrentCharacter).orElse("human");
+				RPGComponentInitializer.RPG_COMPONENT.maybeGet(abstractClientPlayerEntity).map(RPGComponent::getCurrentCharacter).orElse("human");
 
 		if(chaCheck == "quintlarva"){
 			geoPlayerRenderer.render(abstractClientPlayerEntity, f, g, matrixStack, vertexConsumerProvider, i);

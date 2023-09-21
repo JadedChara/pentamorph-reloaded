@@ -3,7 +3,7 @@ package io.github.jadedchara.pentamorph.common;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 
-import io.github.jadedchara.pentamorph.common.util.component.RPGManage;
+import io.github.jadedchara.pentamorph.common.util.component.RPGComponentInitializer;
 import net.minecraft.entity.player.PlayerEntity;
 import static net.minecraft.server.command.CommandManager.literal;
 //import static net.minecraft.server.command.CommandManager.
@@ -38,6 +38,6 @@ public class CyberformCommand {
 	}
 	private static void setCharacter(PlayerEntity player, String providedCharacter){
 		//RPGManage.setProvidedCharacter(player,providedCharacter);
-		RPGManage.RPG.maybeGet(player).get().setProvidedCharacter(player,providedCharacter);
+		RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().setProvidedCharacter(player,providedCharacter);
 	}
 }
