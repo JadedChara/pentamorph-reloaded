@@ -15,14 +15,14 @@ public class SubcomponentRegistry {
 	}
 	public static final ComponentKey<RPGManage> RPG=
 			ComponentRegistry.getOrCreate(new Identifier(Pentamorph.MOD_ID,"rpg"),RPGManage.class);
-	public static String getProvidedCharacter(PlayerEntity provider){
-		String cha = RPG.maybeGet(provider).map(RPGManage::getCharacter).orElse("Unconfigured");
+	/*public static String getProvidedCharacter(PlayerEntity provider){
+		String cha = RPG.maybeGet(provider).map(RPGManage::getProvidedCharacter).orElse("Unconfigured");
 		//System.out.print("Character set to: [" + cha + "]");
 		return cha;
 	}
 	public static void setProvidedCharacter(PlayerEntity provider, String character){
-		RPG.get(provider).setCharacter(character);
+		RPG.get(provider).setProvidedCharacter(character);
 		RPG.sync(provider);
 		//System.out.print("Character set to: [" + character + "]");
-	}
+	}*/
 }

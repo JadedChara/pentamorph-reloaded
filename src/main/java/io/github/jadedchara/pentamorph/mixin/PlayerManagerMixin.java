@@ -1,6 +1,7 @@
 package io.github.jadedchara.pentamorph.mixin;
 
 import io.github.jadedchara.pentamorph.common.SubcomponentRegistry;
+import io.github.jadedchara.pentamorph.common.util.component.RPGManage;
 import io.github.jadedchara.pentamorph.mixin.client.PlayerRenderAccess;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -18,7 +19,8 @@ public class PlayerManagerMixin {
 	@Inject(at = @At("RETURN"),method = "onPlayerConnect", cancellable = true)
 	private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci){
 		player.setPose(EntityPose.SWIMMING);
-		SubcomponentRegistry.getProvidedCharacter(player);
+		System.out.println(player.getName() + "'s ID component: [" + RPGManage.getProvidedCharacter(player) + "]");
+
 		//((PlayerRenderAccess) ).getRenderers().replace();
 
 

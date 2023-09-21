@@ -8,7 +8,7 @@ import io.github.jadedchara.pentamorph.common.SubcomponentRegistry;
 public class RPGComponentInitializer implements EntityComponentInitializer {
 	@Override
 	public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
-		registry.registerForPlayers(SubcomponentRegistry.RPG, player-> new RPGManage(), RespawnCopyStrategy.LOSSLESS_ONLY);
-		System.out.print("[[  Enabling registry...  ]]");
+		registry.registerForPlayers(RPGManage.RPG, player-> new RPGManage(), RespawnCopyStrategy.ALWAYS_COPY);
+		System.out.println("[[  Enabling registry...  ]]");
 	}
 }

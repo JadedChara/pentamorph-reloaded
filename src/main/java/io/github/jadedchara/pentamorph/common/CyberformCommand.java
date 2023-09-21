@@ -3,11 +3,13 @@ package io.github.jadedchara.pentamorph.common;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 
+import io.github.jadedchara.pentamorph.common.util.component.RPGManage;
 import net.minecraft.entity.player.PlayerEntity;
 import static net.minecraft.server.command.CommandManager.literal;
 //import static net.minecraft.server.command.CommandManager.
 import static net.minecraft.server.command.CommandManager.argument;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.Text;
 
 
 public class CyberformCommand {
@@ -26,6 +28,8 @@ public class CyberformCommand {
 				)
 				.then(literal("larva")
 					.executes(context->{
+
+
 						setCharacter(context.getSource().getPlayerOrThrow(),"quintlarva");
 						return Command.SINGLE_SUCCESS;
 					})
@@ -33,6 +37,7 @@ public class CyberformCommand {
 		);
 	}
 	private static void setCharacter(PlayerEntity player, String providedCharacter){
-		SubcomponentRegistry.setProvidedCharacter(player,providedCharacter);
+		//RPGManage.setProvidedCharacter(player,providedCharacter);
+		RPGManage.RPG.maybeGet(player).get().setProvidedCharacter(player,providedCharacter);
 	}
 }

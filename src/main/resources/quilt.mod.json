@@ -20,7 +20,8 @@
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
 			"init": "io.github.jadedchara.pentamorph.Pentamorph",
-			"client_init": "io.github.jadedchara.pentamorph.client.PentamorphClient"
+			"client_init": "io.github.jadedchara.pentamorph.client.PentamorphClient",
+			"cardinal-components": "io.github.jadedchara.pentamorph.common.util.component.RPGComponentInitializer"
 		},
 		"depends": [
 			{
