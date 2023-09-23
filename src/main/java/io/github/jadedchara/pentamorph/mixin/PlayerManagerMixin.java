@@ -18,6 +18,7 @@ public class PlayerManagerMixin {
 	@Inject(at = @At("RETURN"),method = "onPlayerConnect", cancellable = true)
 	private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci){
 		player.setPose(EntityPose.SWIMMING);
+		RPGComponentInitializer.RPG_COMPONENT.sync(player);
 		System.out.println(player.getName() + "'s ID component: [" + RPGComponent.getProvidedCharacter(player) + "]");
 
 		if(player instanceof HitboxAccess){

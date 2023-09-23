@@ -29,11 +29,11 @@ public abstract class PlayerEntityMixin extends LivingEntity implements HitboxAc
 	@Shadow
 	protected abstract void updatePose();
 
-	private float NEW_CROUCH_BOUNDING_BOX_HEIGHT = 1.5F;
-	private float NEW_SWIMMING_BOUNDING_BOX_WIDTH = 0.6F;
-	private float NEW_SWIMMING_BOUNDING_BOX_HEIGHT = 0.6F;
-	private float NEW_DEFAULT_EYE_HEIGHT = 1.62F;
-	private EntityDimensions NEW_STANDING_DIMENSIONS = EntityDimensions.changing(0.6f,1.8f);
+	private float newCrouchBoundingBoxHeight = 1.5F;
+	private float newSwimmingBoundingBoxWidth = 0.6F;
+	private float newSwimmingBoundingBoxHeight = 0.6F;
+	private float newDefaultEyeHeight = 1.62F;
+	private EntityDimensions newStandingDimensions = EntityDimensions.changing(0.6f,1.8f);
 	private static Map<EntityPose, EntityDimensions> POSE_DIMENSIONS;
 
 	@Inject(at = @At("RETURN"), method = "getDimensions", cancellable = true)
@@ -45,7 +45,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements HitboxAc
 			STANDING_DIMENSIONS = RPGComponentInitializer.RPG_COMPONENT.maybeGet(this).get().getDimensions();
 			ci.setReturnValue(RPGComponentInitializer.RPG_COMPONENT.maybeGet(this).get().getDimensions());
 		}else{*/
-			ci.setReturnValue((EntityDimensions) NEW_STANDING_DIMENSIONS);
+			newStandingDimensions = RPGComponentInitializer.RPG_COMPONENT.get(this).getDimensions();
+			ci.setReturnValue((EntityDimensions) newStandingDimensions);
 		//}
 	}
 
@@ -55,7 +56,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements HitboxAc
 			DEFAULT_EYE_HEIGHT = RPGComponentInitializer.RPG_COMPONENT.maybeGet(this).get().getEyeHeight();
 			ci.setReturnValue(RPGComponentInitializer.RPG_COMPONENT.maybeGet(this).get().getEyeHeight());
 		}else{*/
-			ci.setReturnValue(NEW_DEFAULT_EYE_HEIGHT);
+			newDefaultEyeHeight = RPGComponentInitializer.RPG_COMPONENT.get(this).getEyeHeight();
+			ci.setReturnValue(newDefaultEyeHeight);
 		//}
 	}
 	protected PlayerEntityMixin(World world) {
@@ -71,32 +73,32 @@ public abstract class PlayerEntityMixin extends LivingEntity implements HitboxAc
 	}
 	@Override
 	public EntityDimensions getEntitySize(){
-		return this.NEW_STANDING_DIMENSIONS;
+		return this.newStandingDimensions;
 	}
 	@Override
 	public float getEntityEyeLevel(){
-		return this.NEW_DEFAULT_EYE_HEIGHT;
+		return this.newDefaultEyeHeight;
 	}
 	@Override
 	public float getEntityCrouchHeight(){
-		return this.NEW_CROUCH_BOUNDING_BOX_HEIGHT;
+		return this.newCrouchBoundingBoxHeight;
 	}
 	@Override
 	public float getEntitySwimHeight(){
-		return this.NEW_SWIMMING_BOUNDING_BOX_HEIGHT;
+		return this.newSwimmingBoundingBoxHeight;
 	}
 	@Override
 	public float getEntitySwimWidth(){
-		return this.NEW_SWIMMING_BOUNDING_BOX_WIDTH;
+		return this.newSwimmingBoundingBoxWidth;
 	}
 
 	@Override
 	public void setEntitySize(EntityDimensions dimensions, float eyeHeight, float crouchHeight, float swimHeight,
 							  float swimWidth){
-		this.NEW_STANDING_DIMENSIONS = dimensions;
-		this.NEW_DEFAULT_EYE_HEIGHT = eyeHeight;
-		this.NEW_CROUCH_BOUNDING_BOX_HEIGHT = crouchHeight;
-		this.NEW_SWIMMING_BOUNDING_BOX_HEIGHT = swimHeight;
-		this.NEW_SWIMMING_BOUNDING_BOX_WIDTH = swimWidth;
+		this.newStandingDimensions = dimensions;
+		this.newDefaultEyeHeight = eyeHeight;
+		this.newCrouchBoundingBoxHeight = crouchHeight;
+		this.newSwimmingBoundingBoxHeight = swimHeight;
+		this.newSwimmingBoundingBoxWidth = swimWidth;
 	}
 }
