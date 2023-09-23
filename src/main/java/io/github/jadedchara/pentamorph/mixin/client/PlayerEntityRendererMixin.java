@@ -27,7 +27,7 @@ public class PlayerEntityRendererMixin<T extends PlayerEntity> {
 	*/
 	@Inject(method="render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At(value = "HEAD"), cancellable = true)
 	public void reRender(
-			AbstractClientPlayerEntity abstractClientPlayerEntity,
+			AbstractClientPlayerEntity player,
 			float f,
 			float g,
 			MatrixStack matrixStack,
@@ -42,10 +42,12 @@ public class PlayerEntityRendererMixin<T extends PlayerEntity> {
 		}
 
 		String chaCheck =
-				RPGComponentInitializer.RPG_COMPONENT.maybeGet(abstractClientPlayerEntity).map(RPGComponent::getCurrentCharacter).orElse("human");
+				RPGComponentInitializer.RPG_COMPONENT.get(player).getCurrentCharacter();
+		//System.out.println(chaCheck);
 
-		if(chaCheck == "quintlarva"){
-			geoPlayerRenderer.render(abstractClientPlayerEntity, f, g, matrixStack, vertexConsumerProvider, i);
+		//player.getComponent(RPGComponentInitializer.RPG_COMPONENT).getCurrentCharacter();
+		if(chaCheck.equals("quintlarva")){
+			geoPlayerRenderer.render(player, f, g, matrixStack, vertexConsumerProvider, i);
 			//System.out.print("Updating Player model...");
 			ci.cancel();
 		}
