@@ -21,8 +21,11 @@ public class PlayerManagerMixin {
 		System.out.println(player.getName() + "'s ID component: [" + RPGComponent.getProvidedCharacter(player) + "]");
 
 		if(player instanceof HitboxAccess){
-			System.out.println(player + ": " + ((HitboxAccess)player).getEntitySize()+" / "+((HitboxAccess)player).getEntityEyeLevel());
-			/*((HitboxAccess) player).setEntitySize(
+			/*System.out.println(
+					player +
+							": " + ((HitboxAccess)player).getEntitySize()+
+							" / "+((HitboxAccess)player).getEntityEyeLevel());
+			((HitboxAccess) player).setEntitySize(
 				RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().getDimensions(),
 				RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().getEyeHeight(),
 				RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().getCrouchHeight(),

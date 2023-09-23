@@ -31,7 +31,7 @@ public class RPGComponent implements RPGEdit, AutoSyncedComponent {
 		this.swimWidth = swimWidth;
 		this.eyeHeight = eyeHeight;
 		if(provider instanceof HitboxAccess){
-			((HitboxAccess) provider).setEntitySize(dimensions,eyeHeight,crouchHeight,swimHeight,swimWidth);
+			//((HitboxAccess) provider).setEntitySize(dimensions,eyeHeight,crouchHeight,swimHeight,swimWidth);
 		}
 		RPGComponentInitializer.RPG_COMPONENT.sync(this.provider);
 	}

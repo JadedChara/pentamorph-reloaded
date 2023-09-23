@@ -44,6 +44,6 @@ public class CyberformCommand {
 		//RPGManage.setProvidedCharacter(player,providedCharacter);
 		//player.getComponent()
 		RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().setProvidedCharacter(player,providedCharacter,
-				dimensions, eyeHeight, crouchHeight, swimHeight, swimWidth);
+				dimensions, crouchHeight, swimHeight, swimWidth, eyeHeight);
 	}
 }
