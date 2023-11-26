@@ -3,12 +3,14 @@ package io.github.jadedchara.pentamorph.common;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 
+import io.github.jadedchara.pentamorph.common.util.component.RPGComponent;
 import io.github.jadedchara.pentamorph.common.util.component.RPGComponentInitializer;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.player.PlayerEntity;
 import static net.minecraft.server.command.CommandManager.literal;
 //import static net.minecraft.server.command.CommandManager.
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 
 public class CyberformCommand {
@@ -39,11 +41,12 @@ public class CyberformCommand {
 				)
 		);
 	}
-	private static void setCharacter(PlayerEntity player, String providedCharacter, EntityDimensions dimensions,
+	private static void setCharacter(ServerPlayerEntity player, String providedCharacter, EntityDimensions dimensions,
 									 float eyeHeight, float crouchHeight, float swimHeight, float swimWidth){
 		//RPGManage.setProvidedCharacter(player,providedCharacter);
 		//player.getComponent()
 		RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().setProvidedCharacter(player,providedCharacter,
 				dimensions, crouchHeight, swimHeight, swimWidth, eyeHeight);
+		//RPGComponentInitializer.RPG_COMPONENT.sync(player);
 	}
 }

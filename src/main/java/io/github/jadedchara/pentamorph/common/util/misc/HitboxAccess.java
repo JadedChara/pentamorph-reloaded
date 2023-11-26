@@ -2,7 +2,7 @@ package io.github.jadedchara.pentamorph.common.util.misc;
 
 import net.minecraft.entity.EntityDimensions;
 
-public interface HitboxAccess {
+public interface HitboxAccess{
 	//float eyeHeight = 1.62f;
 	//float crouchHeight = 1.5f;
 	//float swimHeight = 0.6f;

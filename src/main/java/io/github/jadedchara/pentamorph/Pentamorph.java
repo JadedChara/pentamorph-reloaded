@@ -5,6 +5,7 @@ import io.github.jadedchara.pentamorph.common.CyberformCommand;
 import io.github.jadedchara.pentamorph.common.EntityRegistry;
 import io.github.jadedchara.pentamorph.common.SubcomponentRegistry;
 
+import io.github.jadedchara.pentamorph.common.util.misc.DataTracking;
 import net.minecraft.util.Identifier;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
@@ -29,7 +30,7 @@ public class Pentamorph implements ModInitializer {
 		GeckoLib.initialize();
 		BlockRegistry.init();
 		EntityRegistry.init();
-		SubcomponentRegistry.init();
+		//DataTracking.init();
 		CommandRegistrationCallback.EVENT.register(((dispatcher, buildContext, environment) -> {
 			CyberformCommand.register(dispatcher);
 		}));

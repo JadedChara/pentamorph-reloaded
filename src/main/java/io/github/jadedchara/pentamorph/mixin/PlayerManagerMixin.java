@@ -17,26 +17,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PlayerManagerMixin {
 	@Inject(at = @At("RETURN"),method = "onPlayerConnect", cancellable = true)
 	private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci){
-		player.setPose(EntityPose.SWIMMING);
 		RPGComponentInitializer.RPG_COMPONENT.sync(player);
 		System.out.println(player.getName() + "'s ID component: [" + RPGComponent.getProvidedCharacter(player) + "]");
-
-		if(player instanceof HitboxAccess){
-			/*System.out.println(
-					player +
-							": " + ((HitboxAccess)player).getEntitySize()+
-							" / "+((HitboxAccess)player).getEntityEyeLevel());
-			((HitboxAccess) player).setEntitySize(
-				RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().getDimensions(),
-				RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().getEyeHeight(),
-				RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().getCrouchHeight(),
-				RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().getSwimHeight(),
-				RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().getSwimWidth()
-			);*/
-		}
-		//((PlayerRenderAccess) ).getRenderers().replace();
-
-
+		//player.calculateDimensions();
 	}
-	//@Inject(at=@At("RETURN"),method="")
 }
