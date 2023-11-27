@@ -2,13 +2,10 @@ package io.github.jadedchara.pentamorph.common;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-
-import io.github.jadedchara.pentamorph.common.util.component.RPGComponent;
 import io.github.jadedchara.pentamorph.common.util.component.RPGComponentInitializer;
 import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.player.PlayerEntity;
 import static net.minecraft.server.command.CommandManager.literal;
-//import static net.minecraft.server.command.CommandManager.
+
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -23,8 +20,7 @@ public class CyberformCommand {
 				})*/
 				.then(literal("human")
 					.executes(context->{
-						setCharacter(context.getSource().getPlayerOrThrow(),"human",EntityDimensions.changing(0.6f,
-								1.8f),1.62f,1.5f,0.6f,0.6f);
+						setCharacter(context.getSource().getPlayerOrThrow(),"human",0.6F,1.8F,1.62f);
 						System.out.println("[Set to human]");
 						return Command.SINGLE_SUCCESS;
 					})
@@ -34,19 +30,17 @@ public class CyberformCommand {
 
 
 						setCharacter(context.getSource().getPlayerOrThrow(),"quintlarva",
-								EntityDimensions.changing(0.6f,0.6f),0.5f,0.5f,0.6f,0.6f);
+								0.6F,0.6F,0.5f);
 						System.out.println("[Set to larva]");
 						return Command.SINGLE_SUCCESS;
 					})
 				)
 		);
 	}
-	private static void setCharacter(ServerPlayerEntity player, String providedCharacter, EntityDimensions dimensions,
-									 float eyeHeight, float crouchHeight, float swimHeight, float swimWidth){
-		//RPGManage.setProvidedCharacter(player,providedCharacter);
-		//player.getComponent()
+	private static void setCharacter(ServerPlayerEntity player, String providedCharacter, float sw, float sh,
+									 float eyeHeight){
 		RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().setProvidedCharacter(player,providedCharacter,
-				dimensions, crouchHeight, swimHeight, swimWidth, eyeHeight);
+				sh, sw,eyeHeight);
 		//RPGComponentInitializer.RPG_COMPONENT.sync(player);
 	}
 }

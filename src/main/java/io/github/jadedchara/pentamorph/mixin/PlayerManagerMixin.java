@@ -3,8 +3,6 @@ package io.github.jadedchara.pentamorph.mixin;
 
 import io.github.jadedchara.pentamorph.common.util.component.RPGComponent;
 import io.github.jadedchara.pentamorph.common.util.component.RPGComponentInitializer;
-import io.github.jadedchara.pentamorph.common.util.misc.HitboxAccess;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;

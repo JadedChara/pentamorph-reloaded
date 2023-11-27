@@ -1,98 +1,69 @@
 package io.github.jadedchara.pentamorph.common.util.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import io.github.jadedchara.pentamorph.common.util.misc.HitboxAccess;
-import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.network.ServerPlayerEntity;
-import org.jetbrains.annotations.Nullable;
 
 public class RPGComponent implements RPGEdit, AutoSyncedComponent {
 
 	public String cha = "human";
 	public PlayerEntity provider;
-
-	public EntityDimensions dimensions = EntityDimensions.changing(0.6f,1.8f);
-	public float crouchHeight = 1.5f;
-	public float swimHeight = 0.6f;
-	public float swimWidth = 0.6f;
+	public float standingHeight = 1.8F;
+	public float standingWidth = 0.6F;
 	public float eyeHeight = 1.62f;
 
 	public RPGComponent(PlayerEntity player){
-		this.provider=player;
+		//this.provider=player;
 	}
 
-	public void setProvidedCharacter(PlayerEntity provider, String character, EntityDimensions dimensions,
-									 float crouchHeight, float swimHeight, float swimWidth, float eyeHeight) {
-		this.provider = provider;
+	public void setProvidedCharacter(PlayerEntity pr, String character, float sh, float sw, float eh) {
+		this.provider = pr;
 		this.cha = character;
-		this.dimensions = dimensions;
-		this.crouchHeight = crouchHeight;
-		this.swimHeight = swimHeight;
-		this.swimWidth = swimWidth;
-		this.eyeHeight = eyeHeight;
-		if(provider instanceof ServerPlayerEntity){
-			RPGComponentInitializer.RPG_COMPONENT.sync(this.provider);
-		}
-		provider.calculateDimensions();
-		//RPGComponentInitializer.RPG_COMPONENT.sync(this.provider);
+		this.standingHeight = sh;
+		this.standingWidth = sw;
+		this.eyeHeight = eh;
+		RPGComponentInitializer.RPG_COMPONENT.sync(pr);
+		System.out.println("Syncing changes...\n [set dimensions to: "+this.standingHeight + " " + this.standingWidth +"]\n[set eye level to: "+this.eyeHeight+"]");
 	}
-
 	//@Override
-	public static String getProvidedCharacter(PlayerEntity provider) {
-		//RPGComponentInitializer.RPG_COMPONENT.maybeGet(provider).get().getCurrentCharacter();
-		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(provider).map(RPGComponent::getCurrentCharacter).orElse("human");
+	public static String getProvidedCharacter(PlayerEntity pr) {
+		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(pr).map(RPGComponent::getCurrentCharacter).orElse(
+				"human");
+	}
+	public static float getProvidedEyeHeight(LivingEntity pr){
+		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(pr).map(RPGComponent::getEyeHeight).orElse(1.62F);
+	}
+	public static float getProvidedHeight(LivingEntity pr){
+		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(pr).map(RPGComponent::getStandingHeight).orElse(1.8F);
+	}
+	public static float getProvidedWidth(LivingEntity pr){
+		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(pr).map(RPGComponent::getStandingWidth).orElse(0.6F);
 	}
 	public String getCurrentCharacter(){
 		return this.cha;
 	}
 
-	public float getCrouchHeight() {
-		return this.crouchHeight;
-	}
-	public float getSwimHeight(){
-		return this.swimHeight;
-	}
-	public float getSwimWidth(){
-		return this.swimWidth;
-	}
 	public float getEyeHeight(){
 		return this.eyeHeight;
 	}
-	public EntityDimensions getDimensions(){
-		return this.dimensions;
-	}
 
-	/*
-	STATIC METHODS
-	 */
-	public static @Nullable Float getEyeHeightFromProvider(LivingEntity provider) {
-		RPGComponent r = RPGComponentInitializer.RPG_COMPONENT.getNullable(provider);
-		return r==null ? null: r.getEyeHeight();
-	}
-	public static @Nullable EntityDimensions getDimensionsFromProvider(LivingEntity provider){
-		RPGComponent r = RPGComponentInitializer.RPG_COMPONENT.getNullable(provider);
-		return r==null ? null: r.getDimensions();
-	}
+	public float getStandingHeight(){return this.standingHeight;}
+	public float getStandingWidth(){return this.standingWidth;}
 
-	///**/
 
 	@Override
 	public void readFromNbt(NbtCompound tag) {
 		this.cha = tag.getString("character");
+		this.eyeHeight = tag.getFloat("eyelevel");
+		this.standingHeight = tag.getFloat("standHeight");
+		this.standingWidth = tag.getFloat("standWidth");
 	}
-
 	@Override
 	public void writeToNbt(NbtCompound tag) {
 		tag.putString("character",cha);
+		tag.putFloat("eyelevel",eyeHeight);
+		tag.putFloat("standheight",standingHeight);
+		tag.putFloat("standwidth",standingWidth);
 	}
-
-	/*public EntityDimensions readDimensions(NbtCompound tag){
-		return new EntityDimensions(tag.getString("dim"),);
-	}
-	public void writeDimensions (NbtCompound tag, Float height,Float width){
-		tag.putString("dim",width+"-"+height);
-	}*/
 }
