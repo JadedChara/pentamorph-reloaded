@@ -4,7 +4,7 @@ import io.github.jadedchara.pentamorph.Pentamorph;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
-import org.quiltmc.qsl.entity.networking.api.tracked_data.QuiltTrackedDataHandlerRegistry;
+import org.quiltmc.qsl.entity.extensions.api.networking.QuiltTrackedDataHandlerRegistry;
 
 import java.util.Optional;
 

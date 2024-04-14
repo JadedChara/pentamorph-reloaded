@@ -4,6 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import org.jetbrains.annotations.Nullable;
 
 public class RPGComponent implements RPGEdit, AutoSyncedComponent {
 
@@ -26,7 +27,6 @@ public class RPGComponent implements RPGEdit, AutoSyncedComponent {
 		RPGComponentInitializer.RPG_COMPONENT.sync(pr);
 		System.out.println("Syncing changes...\n [set dimensions to: "+this.standingHeight + " " + this.standingWidth +"]\n[set eye level to: "+this.eyeHeight+"]");
 	}
-	//@Override
 	public static String getProvidedCharacter(PlayerEntity pr) {
 		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(pr).map(RPGComponent::getCurrentCharacter).orElse(
 				"human");
@@ -34,9 +34,11 @@ public class RPGComponent implements RPGEdit, AutoSyncedComponent {
 	public static float getProvidedEyeHeight(LivingEntity pr){
 		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(pr).map(RPGComponent::getEyeHeight).orElse(1.62F);
 	}
+
 	public static float getProvidedHeight(LivingEntity pr){
 		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(pr).map(RPGComponent::getStandingHeight).orElse(1.8F);
 	}
+
 	public static float getProvidedWidth(LivingEntity pr){
 		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(pr).map(RPGComponent::getStandingWidth).orElse(0.6F);
 	}

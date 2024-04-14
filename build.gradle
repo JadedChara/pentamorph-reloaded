@@ -46,14 +46,14 @@ dependencies {
 		exclude (group: "org.quiltmc.quilted-fabric-api", module: "fabric-gametest-api-v1")
 	}
 	// modImplementation "org.quiltmc:qsl:qsl:3.0.0-beta.29+1.19.2"
-	modImplementation ('software.bernie.geckolib:geckolib-fabric-1.20.1:4.2.2'){
+	modImplementation ('software.bernie.geckolib:geckolib-fabric-1.20.4:4.4.2'){
 		exclude group: "net.fabricmc"
 		exclude group: "net.fabricmc.fabric-api"
 	}
 	// modImplementation libs.bundles.quilted.fabric.api // If you wish to use Fabric API's deprecated modules, you can replace the above line with this one
-	modImplementation ("dev.onyxstudios.cardinal-components-api:cardinal-components-api:5.2.1")
+	modImplementation ("dev.onyxstudios.cardinal-components-api:cardinal-components-api:5.4.0")
 	//core library reference (unused, because quilted fabric does the thing)
-	//modImplementation "org.quiltmc:qsl:core:3.0.0-beta.29+1.19.2"
+	modImplementation ("org.quiltmc:qsl:8.0.0-alpha.12+1.20.4")
 }
 
 processResources {

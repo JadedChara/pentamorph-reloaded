@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,11 +22,13 @@ public abstract class PlayerEntityMixin extends LivingEntity implements HitboxAc
 	@Shadow
 	public abstract boolean isSwimming();
 
+
 	@Shadow
 	public abstract EntityDimensions getDimensions(EntityPose pose);
 
 	@Shadow
 	protected abstract void initDataTracker();
+
 
 	@Inject(at=@At("HEAD"), method="initDataTracker",cancellable = true)
 	private void initData(CallbackInfo ci){
@@ -36,35 +39,32 @@ public abstract class PlayerEntityMixin extends LivingEntity implements HitboxAc
 
 	protected PlayerEntityMixin(World world) {
 		super(EntityType.PLAYER, world);
-		super.calculateDimensions();
-		super.initDataTracker();
+		//super.calculateDimensions();
+		//super.initDataTracker();
 	}
 
 
-	/*@Inject(at = @At("RETURN"), method = "getDimensions", cancellable = true)
+	@Inject(at = @At("RETURN"), method = "getDimensions", cancellable = true)
 	private void tweakDimensions(EntityPose pose, CallbackInfoReturnable<EntityDimensions> ci){
-		if(
-				((RPGComponent.getProvidedWidth(this) != tempwidth)&&(RPGComponent.getProvidedHeight(this) !=tempheight))
-						||((RPGComponent.getProvidedWidth(this) != tempwidth)||(RPGComponent.getProvidedHeight(this) !=tempheight))
-		){
-			tempheight = RPGComponent.getProvidedHeight(this);
-			tempwidth = RPGComponent.getProvidedWidth(this);
-			System.out.println(this.getHeight()+":"+this.getWidth());
-		}
-		try{
+		Float subwidth = ci.getReturnValue().width*(tempwidth/0.6F);
+		Float subheight = ci.getReturnValue().height*(tempheight/1.8F);
 			ci.setReturnValue(new EntityDimensions(
-					(tempwidth/0.6F)*ci.getReturnValue().width,
-					(tempheight/1.8F)*ci.getReturnValue().height,
+					subwidth,
+					subheight,
 					false
 			));
-		}catch(NullPointerException err){
+		/*}catch(NullPointerException err){
 			System.out.println("[Failed To adjust dimensions]");
-		}
+		}*/
 
-	}*/
+	}
 	@Inject(at = @At("RETURN"), method= "getActiveEyeHeight",cancellable = true)
 	private void tweakActiveEyeHeight(EntityPose pose, EntityDimensions dimensions, CallbackInfoReturnable<Float> ci){
 		try{
+			Float th = RPGComponent.getProvidedHeight(this);
+			Float tw = RPGComponent.getProvidedWidth(this);
+			if(tw !=null && tw!=0){tempwidth = tw;}
+			if(th !=null && th!=0){tempheight = th;}
 			ci.setReturnValue((RPGComponent.getProvidedEyeHeight(this)/1.62F)*ci.getReturnValue());
 		}catch(NullPointerException err){
 			System.out.println("[Failed to adjust eye level]");

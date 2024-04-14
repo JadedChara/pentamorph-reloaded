@@ -6,6 +6,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib.model.GeoModel;
 
+import java.util.concurrent.ExecutionException;
+
 public class GeoReplacedPlayerModel extends GeoModel<GeoReplacedPlayer> {
 	/*public Identifier MODEL;
 	public Identifier TEXTURE;
@@ -34,11 +36,13 @@ public class GeoReplacedPlayerModel extends GeoModel<GeoReplacedPlayer> {
 	@Override
 	public Identifier getTextureResource(GeoReplacedPlayer anim) {
 		if(anim.character == "human"){
-			MinecraftClient.getInstance().getSkinProvider().loadSkin(
+			/*MinecraftClient.getInstance().getSkinProvider().loadSkin(
 					anim.gameProfile,
 					((type, identifier,minecraftProfileTexture) -> {
 						this.TEXTURE = identifier;
-					}), true);
+					}), true);*/
+
+			this.TEXTURE = MinecraftClient.getInstance().getSkinProvider().getSkin(anim.gameProfile).texture();
 		}
 		return this.TEXTURE;
 	};

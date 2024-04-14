@@ -10,6 +10,8 @@ import net.minecraft.entity.EntityType;
 
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
+import org.quiltmc.qsl.base.impl.event.EventRegistry;
+import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
 
 
 public class PentamorphClient implements ClientModInitializer {

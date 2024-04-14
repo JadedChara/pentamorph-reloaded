@@ -18,5 +18,7 @@ public class PlayerManagerMixin {
 		RPGComponentInitializer.RPG_COMPONENT.sync(player);
 		System.out.println(player.getName() + "'s ID component: [" + RPGComponent.getProvidedCharacter(player) + "]");
 		//player.calculateDimensions();
+		player.setSneaking(true);
+		player.setSneaking(false);
 	}
 }
