@@ -41,6 +41,5 @@ public class CyberformCommand {
 									 float eyeHeight){
 		RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().setProvidedCharacter(player,providedCharacter,
 				sh, sw,eyeHeight);
-		//RPGComponentInitializer.RPG_COMPONENT.sync(player);
 	}
 }

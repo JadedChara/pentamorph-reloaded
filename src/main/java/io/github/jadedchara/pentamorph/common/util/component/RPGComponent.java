@@ -6,6 +6,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+
 public class RPGComponent implements RPGEdit, AutoSyncedComponent {
 
 	public String cha = "human";
@@ -25,9 +27,10 @@ public class RPGComponent implements RPGEdit, AutoSyncedComponent {
 		this.standingWidth = sw;
 		this.eyeHeight = eh;
 		RPGComponentInitializer.RPG_COMPONENT.sync(pr);
+		//System.out.println(this.provider.getClass());
 		System.out.println("Syncing changes...\n [set dimensions to: "+this.standingHeight + " " + this.standingWidth +"]\n[set eye level to: "+this.eyeHeight+"]");
 	}
-	public static String getProvidedCharacter(PlayerEntity pr) {
+	public static String getProvidedCharacter(LivingEntity pr) {
 		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(pr).map(RPGComponent::getCurrentCharacter).orElse(
 				"human");
 	}

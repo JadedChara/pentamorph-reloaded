@@ -34,26 +34,29 @@ public class PlayerEntityRendererMixin<T extends PlayerEntity> {
 			VertexConsumerProvider vertexConsumerProvider,
 			int i,
 			CallbackInfo ci)
-	{
+	{ try {
 		GeoReplacedPlayerRenderer geoPlayerRenderer = this.getGeoPlayerRenderer();
 
-		if(geoPlayerRenderer == null){
+		if (geoPlayerRenderer == null) {
 			return;
 		}
 
 		String chaCheck =
-				RPGComponentInitializer.RPG_COMPONENT.get(player).getCurrentCharacter();
+			//RPGComponentInitializer.RPG_COMPONENT.get(player).getCurrentCharacter();
+			RPGComponent.getProvidedCharacter(player);
 		//System.out.println(chaCheck);
 
 		//player.getComponent(RPGComponentInitializer.RPG_COMPONENT).getCurrentCharacter();
-		if(chaCheck.equals("quintlarva")){
+		if (!chaCheck.equals("human")) {
 			geoPlayerRenderer.render(player, f, g, matrixStack, vertexConsumerProvider, i);
 			//System.out.print("Updating Player model...");
 			ci.cancel();
 		}
 
 		//ci.cancel();
-	}
+	}catch(NullPointerException err){
+		System.out.println("Failed to hook into component:\n"+err+"\n------");
+	}}
 
 
 	public GeoReplacedPlayerRenderer getGeoPlayerRenderer(){

@@ -6,6 +6,7 @@ import io.github.jadedchara.pentamorph.common.util.component.RPGComponentInitial
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.unmapped.C_eyqfalbd;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(PlayerManager.class)
 public class PlayerManagerMixin {
 	@Inject(at = @At("RETURN"),method = "onPlayerConnect", cancellable = true)
-	private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci){
+	private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, C_eyqfalbd c_eyqfalbd, CallbackInfo ci){
 		RPGComponentInitializer.RPG_COMPONENT.sync(player);
 		System.out.println(player.getName() + "'s ID component: [" + RPGComponent.getProvidedCharacter(player) + "]");
 		//player.calculateDimensions();
