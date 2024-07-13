@@ -3,7 +3,7 @@
 	"quilt_loader": {
 		"group": "io.github.jadedchara",
 		"id": "pentamorph",
-		"version": "0.0.6",
+		"version": "0.0.7",
 		"metadata": {
 			"name": "Pentamorph",
 			"description": "A beginning Transformers mod with a particular focus on Quintessons.",
@@ -26,11 +26,11 @@
 		"depends": [
 			{
 				"id": "quilt_loader",
-				"versions": ">=0.25.0-beta.1"
+				"versions": ">=0.26.1-beta.1"
 			},
 			{
 				"id": "quilted_fabric_api",
-				"versions": ">=9.0.0-alpha.7+0.96.11"
+				"versions": ">=9.0.0-alpha.8+0.97.0"
 			},
 			{
 				"id": "minecraft",
@@ -38,7 +38,7 @@
 			},
 			{
 				"id": "geckolib",
-				"version": ">=4.4.2"
+				"version": ">=4.4.6"
 			}
 		]
 	},

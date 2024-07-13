@@ -28,6 +28,10 @@ repositories {
 		name = "Ladysnake Mods"
 		url = 'https://maven.ladysnake.org/releases'
 	}
+	maven {
+		name = 'BlameJared Maven (CrT / Bookshelf)'
+		url = 'https://maven.blamejared.com'
+	}
 }
 
 // All the dependencies are declared at gradle/libs.version.toml and referenced with "libs.<id>"
@@ -43,6 +47,7 @@ dependencies {
 	}
 	*/
 	modImplementation libs.quilt.loader
+	modImplementation("foundry.veil:Veil-fabric-1.20.4:1.0.0.43") { transitive = false }
 
 
 
