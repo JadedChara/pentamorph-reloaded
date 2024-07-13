@@ -2,15 +2,17 @@ package io.github.jadedchara.pentamorph.common;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import io.github.jadedchara.pentamorph.Pentamorph;
 import io.github.jadedchara.pentamorph.common.util.component.RPGComponentInitializer;
-import net.minecraft.entity.EntityDimensions;
 import static net.minecraft.server.command.CommandManager.literal;
 
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 
 
 public class CyberformCommand {
+
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher){
 		dispatcher.register(literal("cyberform")
 				/*.then(argument("character", StringArgumentType.string()))
@@ -42,4 +44,5 @@ public class CyberformCommand {
 		RPGComponentInitializer.RPG_COMPONENT.maybeGet(player).get().setProvidedCharacter(player,providedCharacter,
 				sh, sw,eyeHeight);
 	}
+
 }

@@ -61,8 +61,8 @@ public class RPGComponent implements RPGEdit, AutoSyncedComponent {
 	public void readFromNbt(NbtCompound tag) {
 		this.cha = tag.getString("character");
 		this.eyeHeight = tag.getFloat("eyelevel");
-		this.standingHeight = tag.getFloat("standHeight");
-		this.standingWidth = tag.getFloat("standWidth");
+		this.standingHeight = tag.getFloat("standheight");
+		this.standingWidth = tag.getFloat("standwidth");
 	}
 	@Override
 	public void writeToNbt(NbtCompound tag) {

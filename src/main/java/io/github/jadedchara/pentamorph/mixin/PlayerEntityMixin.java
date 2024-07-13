@@ -58,30 +58,32 @@ public abstract class PlayerEntityMixin extends LivingEntity implements HitboxAc
 				this.tempheight = RPGComponent.getProvidedHeight(this);
 				this.tempwidth = RPGComponent.getProvidedWidth(this);
 				this.tweaked_standing_dimensions = EntityDimensions.changing(this.tempwidth,this.tempheight);
+				this.tweaked_pose_dimensions = ImmutableMap.builder()
+					.put(EntityPose.STANDING, this.tweaked_standing_dimensions)
+					.put(EntityPose.SLEEPING, SLEEPING_DIMENSIONS)
+					.put(EntityPose.FALL_FLYING, EntityDimensions.changing(this.tempwidth, this.tempwidth))
+					.put(EntityPose.SWIMMING, EntityDimensions.changing(this.tempwidth, this.tempwidth))
+					.put(EntityPose.SPIN_ATTACK, EntityDimensions.changing(this.tempwidth, this.tempwidth))
+					.put(EntityPose.CROUCHING, EntityDimensions.changing(this.tempwidth, (1.5F/1.8F)*this.tempheight))
+					.put(EntityPose.DYING, EntityDimensions.fixed(0.2F, 0.2F)).build();
 				this.lastPose = this.getPose();
 				this.setPose(EntityPose.CROUCHING);
 				this.setPose(this.lastPose);
+				System.out.println(this.getClass() + " / " + Thread.currentThread().getName());
 			}
 		}catch(NullPointerException ignore){
 		}
 		//this.updatePose();
 	}
 
-	@Inject(at = @At("RETURN"), method = "getDimensions", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "getDimensions", cancellable = true)
 	private void tweakDimensions(EntityPose pose, CallbackInfoReturnable<EntityDimensions> ci){
 		try{
-
+			//System.out.println(this.rpgChar + " / ("+this.getClass()+")");
 			//this.callGetEyeHeight(pose,EntityDimensions.changing(tempwidth,tempheight));
 			//System.out.println(this.rpgChar + " /Source: ("+this.getClass()+")");
 			//System.out.println(this.tweaked_standing_dimensions);
-			this.tweaked_pose_dimensions = ImmutableMap.builder()
-				.put(EntityPose.STANDING, this.tweaked_standing_dimensions)
-				.put(EntityPose.SLEEPING, SLEEPING_DIMENSIONS)
-				.put(EntityPose.FALL_FLYING, EntityDimensions.changing(this.tempwidth, this.tempwidth))
-				.put(EntityPose.SWIMMING, EntityDimensions.changing(this.tempwidth, this.tempwidth))
-				.put(EntityPose.SPIN_ATTACK, EntityDimensions.changing(this.tempwidth, this.tempwidth))
-				.put(EntityPose.CROUCHING, EntityDimensions.changing(this.tempwidth, (1.5F/1.8F)*this.tempheight))
-				.put(EntityPose.DYING, EntityDimensions.fixed(0.2F, 0.2F)).build();
+
 			if(!this.rpgChar.equals("human")){
 				ci.setReturnValue((EntityDimensions) this.tweaked_pose_dimensions.getOrDefault(pose,
 					this.tweaked_standing_dimensions));
