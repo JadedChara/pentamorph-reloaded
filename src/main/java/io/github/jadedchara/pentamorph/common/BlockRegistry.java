@@ -40,23 +40,7 @@ public final class BlockRegistry {
 			.build();*/
 	public static void init() {
 
-		/*RegistryMonitor.create(Registries.BLOCK)
-				.filter(context -> {
-					var id = context.id();
-					return false;
-				})
-				.forAll(context -> {
-					context.register(Pentamorph.id("nest_pulp"), NEST_PULP);
-					context.register(Pentamorph.id("calcified_nest_pulp"), CALCIFIED_NEST_PULP);
-					context.register(Pentamorph.id("space_bridge_portal_block"),SPACE_BRIDGE_PORTAL_BLOCK);
-				});*/
 		ArrayList<Item> blocklist = new ArrayList<>();
-		/*RegistryMonitor.create(Registries.ITEM)
-				.forAll(context -> {
-					if ((context.rawId()+2) < blocks.length) {
-						Item.BLOCK_ITEMS.put(blocks[context.rawId()+1], context.value());
-					}
-				});*/
 
 		ItemGroup PENTAMORPH_BLOCKS = FabricItemGroup.builder()
 				.name(Text.of("Pentamorph Blocks"))
