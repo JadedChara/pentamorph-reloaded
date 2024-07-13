@@ -40,7 +40,7 @@ public final class BlockRegistry {
 			.build();*/
 	public static void init() {
 
-		RegistryMonitor.create(Registries.BLOCK)
+		/*RegistryMonitor.create(Registries.BLOCK)
 				.filter(context -> {
 					var id = context.id();
 					return false;
@@ -49,22 +49,22 @@ public final class BlockRegistry {
 					context.register(Pentamorph.id("nest_pulp"), NEST_PULP);
 					context.register(Pentamorph.id("calcified_nest_pulp"), CALCIFIED_NEST_PULP);
 					context.register(Pentamorph.id("space_bridge_portal_block"),SPACE_BRIDGE_PORTAL_BLOCK);
-				});
+				});*/
 		ArrayList<Item> blocklist = new ArrayList<>();
-		RegistryMonitor.create(Registries.ITEM)
+		/*RegistryMonitor.create(Registries.ITEM)
 				.forAll(context -> {
 					if ((context.rawId()+2) < blocks.length) {
 						Item.BLOCK_ITEMS.put(blocks[context.rawId()+1], context.value());
 					}
-				});
+				});*/
 
 		ItemGroup PENTAMORPH_BLOCKS = FabricItemGroup.builder()
 				.name(Text.of("Pentamorph Blocks"))
 				.icon(()->new ItemStack(NEST_PULP))
 				.entries((params, col)->{
-					col.addStack(new ItemStack(NEST_PULP));
-					col.addStack(new ItemStack(CALCIFIED_NEST_PULP));
-					col.addStack(new ItemStack(SPACE_BRIDGE_PORTAL_BLOCK));
+					col.addItem(NEST_PULP);
+					col.addItem(CALCIFIED_NEST_PULP);
+					col.addItem(SPACE_BRIDGE_PORTAL_BLOCK);
 				})
 				.build();
 		Registry.register(Registries.ITEM_GROUP, PENTAMORPH_BLOCKS_KEY, PENTAMORPH_BLOCKS);
@@ -77,6 +77,7 @@ public final class BlockRegistry {
 	static <T extends Block> T blockitemRegister(String name, T block, Item.Settings settings, BiFunction<T,
 			Item.Settings, BlockItem> factory) {
 		itemRegister(name, factory.apply(blockRegister(name, block), settings));
+
 		return block;
 	}
 	static <T extends Block> T blockRegister(String name, T block) {

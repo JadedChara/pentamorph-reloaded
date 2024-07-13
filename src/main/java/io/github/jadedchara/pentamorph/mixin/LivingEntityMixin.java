@@ -17,4 +17,5 @@ public class LivingEntityMixin {
 			//cir.setReturnValue(0.0F);
 		}
 	}
+
 }
