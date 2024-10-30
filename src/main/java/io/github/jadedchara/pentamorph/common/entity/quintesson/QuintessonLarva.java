@@ -21,6 +21,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class QuintessonLarva extends PathAwareEntity implements GeoEntity {
 	//basic pre-config
+
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	@Override
 	protected void initDataTracker(){
@@ -69,7 +70,6 @@ public class QuintessonLarva extends PathAwareEntity implements GeoEntity {
 	//start config
 	public QuintessonLarva(EntityType<? extends PathAwareEntity> type, World world){
 		super(type,world);
-
 	}
 
 }

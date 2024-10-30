@@ -1,5 +1,6 @@
 package io.github.jadedchara.pentamorph.mixin.client;
 
+import foundry.veil.api.quasar.particle.ParticleEmitter;
 import io.github.jadedchara.pentamorph.client.model.rpg.GeoReplacedPlayerModel;
 import io.github.jadedchara.pentamorph.client.render.rpg.GeoReplacedPlayerRenderer;
 import io.github.jadedchara.pentamorph.common.SubcomponentRegistry;

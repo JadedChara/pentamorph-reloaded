@@ -5,7 +5,11 @@ import io.github.jadedchara.pentamorph.common.CyberformCommand;
 import io.github.jadedchara.pentamorph.common.EntityRegistry;
 import io.github.jadedchara.pentamorph.common.SubcomponentRegistry;
 
+import io.github.jadedchara.pentamorph.common.particle.ResonatorShotType;
 import io.github.jadedchara.pentamorph.common.util.misc.DataTracking;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
@@ -22,6 +26,7 @@ public class Pentamorph implements ModInitializer {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger("Pentamorph");
 	public static final String MOD_ID = "pentamorph";
+	public static final ResonatorShotType RESONATOR_SHOT = (ResonatorShotType) FabricParticleTypes.simple(false);
 	public static Identifier id(String path){
 		return new Identifier(MOD_ID,path);
 	}
@@ -37,6 +42,8 @@ public class Pentamorph implements ModInitializer {
 		//TabRegistry.init();
 		//ItemRegistry.init();
 		//RoleRegistry.init();
+
+		Registry.register(Registries.PARTICLE_TYPE, new Identifier(MOD_ID,"resonator_shot"),RESONATOR_SHOT);
 		LOGGER.info("Hello Quilt world from {}!", mod.metadata().name());
 	}
 }

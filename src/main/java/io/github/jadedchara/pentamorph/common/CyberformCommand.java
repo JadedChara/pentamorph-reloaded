@@ -2,6 +2,8 @@ package io.github.jadedchara.pentamorph.common;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import foundry.veil.api.client.registry.LightTypeRegistry.DebugLightFactory;
+import foundry.veil.api.client.render.deferred.light.AreaLight;
 import io.github.jadedchara.pentamorph.Pentamorph;
 import io.github.jadedchara.pentamorph.common.util.component.RPGComponentInitializer;
 import static net.minecraft.server.command.CommandManager.literal;
