@@ -1,0 +1,11 @@
+{
+  "max_lifetime": 100000,
+  "loop": true,
+  "rate": 1,
+  "count": 16,
+  "emitter_settings": {
+    "shape": "pentamorph:basic_smoke",
+    "particle_settings": "pentamorph:basic_smoke"
+  },
+  "particle_data": "pentamorph:basic_smoke"
+}

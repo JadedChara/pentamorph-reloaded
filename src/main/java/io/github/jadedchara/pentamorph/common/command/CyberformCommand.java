@@ -1,16 +1,12 @@
-package io.github.jadedchara.pentamorph.common;
+package io.github.jadedchara.pentamorph.common.command;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import foundry.veil.api.client.registry.LightTypeRegistry.DebugLightFactory;
-import foundry.veil.api.client.render.deferred.light.AreaLight;
-import io.github.jadedchara.pentamorph.Pentamorph;
 import io.github.jadedchara.pentamorph.common.util.component.RPGComponentInitializer;
 import static net.minecraft.server.command.CommandManager.literal;
 
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
 
 
 public class CyberformCommand {

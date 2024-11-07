@@ -1,0 +1,28 @@
+{
+  "max_lifetime": 1,
+  "loop": false,
+  "rate": 1,
+  "count": 5,
+  "emitter_settings": {
+    "shape": "pentamorph:spore_shape",
+    "particle_settings": {
+      "random_speed": false,
+      "random_size": true,
+      "random_lifetime": true,
+      "initial_direction": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "random_initial_direction": false,
+      "random_initial_rotation": true,
+      "particle_size_variation": 0.0075,
+      "particle_lifetime": 10,
+      "particle_lifetime_variation": 0,
+      "particle_speed": 1.0,
+      "base_particle_size": 0.0
+    },
+    "force_spawn": true
+  },
+  "particle_data": "pentamorph:spore_particle"
+}

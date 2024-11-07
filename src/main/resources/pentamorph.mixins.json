@@ -9,7 +9,8 @@
     "LivingEntityMixin",
     "PlayerEntityMixin",
     "PlayerManagerMixin",
-    "ServerPlayer"
+    "ServerPlayer",
+    "PSMMixin"
   ],
   "client": [
     "TitleScreenMixin",

@@ -1,0 +1,135 @@
+{
+  "sprite_data": {
+    "sprite": "pentamorph:textures/block/nest_core.png",
+    "frame_count": 1,
+    "frame_width": 1,
+    "frame_height": 1,
+    "stretch_to_lifetime": true
+  },
+  "additive": true,
+  "render_style": "BILLBOARD",
+  "init_modules": [
+    {
+      "module": "light",
+      "gradient": {
+        "interpolant": "q.agePercent",
+        "rgb_points": [
+          {
+            "percent": 0,
+            "color": [
+              0.0,
+              0.6,
+              1.0
+            ]
+          },
+          {
+            "percent": 0.7,
+            "color": [
+              1.0,
+              0.5,
+              0.0
+            ]
+          },
+          {
+            "percent": 1.0,
+            "color": [
+              1.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "alpha_points": [
+          {
+            "percent": 0,
+            "alpha": 1.0
+          },
+          {
+            "percent": 0.95,
+            "alpha": 1.0
+          },
+          {
+            "percent": 1.0,
+            "alpha": 0.0
+          }
+        ]
+      },
+      "brightness": 2.0,
+      "falloff": 1.0,
+      "radius": "3.8*1.5"
+    }
+  ],
+  "update_modules": [
+  ],
+  "collision_modules": [
+  ],
+  "forces": [
+    {
+      "module": "initial_velocity",
+      "direction": [
+        0,
+        -0.5,
+        0.0
+      ],
+      "strength": 0.0,
+      "falloff": 0.0
+    },
+    {
+      "range": 1.0,
+      "strength": 0.25,
+      "falloff": 1.0,
+      "module": "point_force"
+    }
+  ],
+  "render_modules": [
+    {
+      "module": "color",
+      "interpolant": "q.agePercent",
+      "gradient": {
+        "rgb_points": [
+          {
+            "percent": 0,
+            "color": [
+              0.0,
+              0.6,
+              1.0
+            ]
+          },
+          {
+            "percent": 0.7,
+            "color": [
+              1.0,
+              0.5,
+              0.0
+            ]
+          },
+          {
+            "percent": 1.0,
+            "color": [
+              1.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "alpha_points": [
+          {
+            "percent": 0,
+            "alpha": 0.2
+          },
+          {
+            "percent": 0.95,
+            "alpha": 0.2
+          },
+          {
+            "percent": 1.0,
+            "alpha": 0.0
+          }
+        ]
+      }
+    }
+  ],
+  "face_velocity": false,
+  "velocity_stretch_factor": 0.0,
+  "should_collide": true
+}
