@@ -2,20 +2,19 @@ package io.github.jadedchara.pentamorph.client.render.quintesson;
 
 import foundry.veil.api.quasar.emitters.module.ParticleModule;
 import foundry.veil.api.quasar.particle.ParticleEmitter;
-import io.github.jadedchara.pentamorph.client.model.quintesson.QuintessonLarvaModel;
-import io.github.jadedchara.pentamorph.common.entity.quintesson.QuintessonLarva;
+import io.github.jadedchara.pentamorph.client.model.quintesson.QuintessonJurorModel;
+import io.github.jadedchara.pentamorph.common.entity.quintesson.QuintessonJuror;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
-import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 
-public class QuintessonLarvaRenderer extends GeoEntityRenderer<QuintessonLarva>{
+public class QuintessonJurorRenderer extends GeoEntityRenderer<QuintessonJuror>{
 	private ItemStack itemStack;
 	private VertexConsumerProvider vertexConsumerProvider;
-	public QuintessonLarvaRenderer(EntityRendererFactory.Context context){
-		super(context, new QuintessonLarvaModel());
+	public QuintessonJurorRenderer(EntityRendererFactory.Context context){
+		super(context, new QuintessonJurorModel());
 		this.shadowRadius = 0.35f;
 
 /*adjust renderer for particle emission. Maybe have a particle emitter associated, dependent on evolution, a la Scape
@@ -23,10 +22,8 @@ public class QuintessonLarvaRenderer extends GeoEntityRenderer<QuintessonLarva>{
 */
 	}
 	@Override
-	public void render(QuintessonLarva quintLarva, float entityYaw, float partialTick, MatrixStack poseStack,
+	public void render(QuintessonJuror quintJuror, float entityYaw, float partialTick, MatrixStack poseStack,
 					   VertexConsumerProvider bufferSource, int packedLight){
-		super.renderLayers.addLayer(new AutoGlowingGeoLayer<>(this));
-		super.render(quintLarva, entityYaw, partialTick, poseStack, bufferSource, packedLight);
-
+		super.render(quintJuror, entityYaw, partialTick, poseStack, bufferSource, packedLight);
 	}
 }

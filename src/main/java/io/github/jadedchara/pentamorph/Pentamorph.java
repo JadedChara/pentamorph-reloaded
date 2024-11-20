@@ -11,6 +11,8 @@ import io.github.jadedchara.pentamorph.common.blockentity.NestCoreBlockEntity;
 import io.github.jadedchara.pentamorph.common.command.DevCommand;
 import io.github.jadedchara.pentamorph.common.util.misc.PSMAccess;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientBlockEntityEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerBlockEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
@@ -51,6 +53,7 @@ public class Pentamorph implements ModInitializer {
 			CyberformCommand.register(dispatcher);
 			//DevCommand.register(dispatcher);
 		}));
+
 		PlayerBlockBreakEvents.BEFORE.register((world, player, pos, state, blockEntity)->{
 			if(blockEntity instanceof NestCoreBlockEntity){
 				BlockPos ncbe = blockEntity.getPos();
@@ -80,7 +83,8 @@ public class Pentamorph implements ModInitializer {
 			return ActionResult.SUCCESS.isAccepted();
 		});
 
-		ServerBlockEntityEvents.BLOCK_ENTITY_LOAD.register((blockEntity, serverWorld)->{
+		ClientBlockEntityEvents.BLOCK_ENTITY_LOAD.register((blockEntity, serverWorld)->{
+
 			if(blockEntity instanceof NestCoreBlockEntity) {
 				try {
 					ParticleEmitter pe =

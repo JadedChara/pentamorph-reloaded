@@ -46,6 +46,14 @@
 					]
 				},
 				{
+					"name": "eyes",
+					"parent": "body",
+					"pivot": [0, 1.8, -4.01],
+					"cubes": [
+						{"origin": [-3, 1.8, -4.01], "size": [6, 2, 0], "uv": [2, 9]}
+					]
+				},
+				{
 					"name": "FLleg",
 					"parent": "head",
 					"pivot": [2.03393, 1.39041, -2.51047],
