@@ -17,11 +17,17 @@ import net.minecraft.registry.Registry;
 
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+
+
 import org.quiltmc.qsl.block.entity.api.QuiltBlockEntityTypeBuilder;
 import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
 import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
+//import org.quiltmc.qsl.block.entity.api.QuiltBlockEntityTypeBuilder;
+//import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
+//import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 
 import java.util.function.BiFunction;
 
@@ -41,7 +47,7 @@ public final class BlockRegistry {
 					col.addItem(SPACE_BRIDGE_PORTAL_BLOCK);
 				})
 				.build();
-		Registry.register(Registries.ITEM_GROUP, PENTAMORPH_BLOCKS_KEY, PENTAMORPH_BLOCKS);
+		Registry.register(Registries.ITEM_GROUP, "pentamorph:pentamorph_blocks", PENTAMORPH_BLOCKS);
 	}
 
 	//registration
@@ -54,54 +60,85 @@ public final class BlockRegistry {
 		return block;
 	}
 	static <T extends Block> T blockRegister(String name, T block) {
-		return Registry.register(Registries.BLOCK, Pentamorph.id(name), block);
+		return Registry.register(
+			Registries.BLOCK,
+			Identifier.of(Pentamorph.MOD_ID,name),
+			block
+		);
 	}
 	static <T extends Item> T itemRegister(String name, T item) {
-		return Registry.register(Registries.ITEM, Pentamorph.id(name), item);
-
+		return Registry.register(
+			Registries.ITEM,
+			Identifier.of(Pentamorph.MOD_ID,name),
+			item
+		);
 	}
 
 	//Nest Blocks
 	public static final Block NEST_PULP = blockitemRegister("nest_pulp",
-		new Block(QuiltBlockSettings.copyOf(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN_TERRACOTTA)),
-		new QuiltItemSettings()
+		new Block(
+			QuiltBlockSettings
+				.copy(Blocks.IRON_BLOCK)
+				.mapColor(MapColor.BROWN_TERRACOTTA)
+				.sounds(BlockSoundGroup.WART_BLOCK)
+		),
+		new QuiltItemSettings().fireproof()
 	);
 	public static final Block CALCIFIED_NEST_PULP = blockitemRegister("calcified_nest_pulp",
-		new Block(QuiltBlockSettings.copyOf(Blocks.NETHERITE_BLOCK).mapColor(MapColor.METAL)),
-		new QuiltItemSettings()
+		new Block(
+			QuiltBlockSettings
+				.copy(Blocks.NETHERITE_BLOCK)
+				.mapColor(MapColor.METAL)
+				.sounds(BlockSoundGroup.STONE)
+		),
+		new QuiltItemSettings().fireproof()
 	);
 	public static final Block NEST_CORE_BLOCK = blockitemRegister("nest_core",
 		new NestCoreBlock(
 			QuiltBlockSettings
-				.copyOf(Blocks.REINFORCED_DEEPSLATE)
-				.spawnsDustParticles(true)
+				.copy(Blocks.REINFORCED_DEEPSLATE)
 				.mapColor(MapColor.SAND)
-				.requiresTool(true).nonOpaque().luminance(2)
+				.nonOpaque()
+				.sounds(BlockSoundGroup.WART_BLOCK)
 		),
-		new QuiltItemSettings()
+		new QuiltItemSettings().fireproof()
 	);
 	public static final BlockEntityType<NestCoreBlockEntity> NEST_CORE_BLOCK_ENTITY =
 		Registry.register(
 			Registries.BLOCK_ENTITY_TYPE,
-			Pentamorph.id("nest_core_block_entity"),
+			/*RegistryKey.of(
+				RegistryKeys.BLOCK_ENTITY_TYPE,*/
+				Identifier.of(Pentamorph.MOD_ID,
+					"nest_core_block_entity"
+				),
+			//),
 			QuiltBlockEntityTypeBuilder.create(NestCoreBlockEntity::new,NEST_CORE_BLOCK).build()
 		);
 
 	//Space Bridge Blocks
 	public static final Block SPACE_BRIDGE_PORTAL_BLOCK = blockitemRegister("space_bridge_portal_block",
-		new SpaceBridgePortalBlock(QuiltBlockSettings.copyOf(Blocks.GLOWSTONE).mapColor(MapColor.CYAN).luminance(0)),
-		new QuiltItemSettings()
+		new SpaceBridgePortalBlock(
+			QuiltBlockSettings
+				.copy(Blocks.GLOWSTONE)
+				.mapColor(MapColor.CYAN)
+		),
+		new QuiltItemSettings().fireproof()
 	);
 
 	public static final BlockEntityType<SpaceBridgePortalBlockEntity> SPACE_BRIDGE_PORTAL_BLOCK_ENTITY =
 		Registry.register(
 			Registries.BLOCK_ENTITY_TYPE,
-			Pentamorph.id("space_bridge_portal_block_entity"),
+			//RegistryKey.of(
+			//	RegistryKeys.BLOCK_ENTITY_TYPE,
+				Identifier.of(Pentamorph.MOD_ID,
+					"space_bridge_portal_block_entity"
+			//	)
+			),
 			QuiltBlockEntityTypeBuilder.create(SpaceBridgePortalBlockEntity::new,SPACE_BRIDGE_PORTAL_BLOCK).build()
 		);
 
 	//Overwriting registration set
 	public static final RegistryKey<ItemGroup> PENTAMORPH_BLOCKS_KEY = RegistryKey.of(RegistryKeys.ITEM_GROUP,
-			new Identifier(Pentamorph.MOD_ID, "blocks"));
+		Identifier.of(Pentamorph.MOD_ID, "blocks"));
 }
 

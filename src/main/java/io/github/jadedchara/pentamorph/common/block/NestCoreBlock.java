@@ -61,14 +61,8 @@ public class NestCoreBlock extends BlockWithEntity {
 
 	@Override
 	public void onBroken(WorldAccess world, BlockPos pos, BlockState state){
-		/*try{
-			((PSMAccess)this.attachedEntity.getPsm()).erase(this.attachedEntity.getSporeEmitter());
-		}catch(Exception e){
-			System.out.println(e);
+		//this.attachedEntity.terminateEmitter();
 
-			this.attachedEntity.getPsm().clear();
-
-		}*/
 	}
 
 }

@@ -2,7 +2,7 @@ package io.github.jadedchara.pentamorph.common.command;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import foundry.veil.api.client.render.VeilRenderSystem;
+//import foundry.veil.api.client.render.VeilRenderSystem;
 import net.minecraft.server.command.ServerCommandSource;
 
 import static net.minecraft.server.command.CommandManager.literal;
@@ -13,8 +13,9 @@ public class DevCommand {
 			.then(literal("stopPSM")
 				.executes(context ->{
 					try {
-						VeilRenderSystem.renderer().getParticleManager().clear();
-						System.out.println("Current Emitter Count: " + VeilRenderSystem.renderer().getParticleManager().getEmitterCount());
+						//VeilRenderSystem.renderer().getParticleManager().clear();
+						//System.out.println("Current Emitter Count: " + VeilRenderSystem.renderer()
+						// .getParticleManager().getEmitterCount());
 					}catch(Exception e){
 						System.out.println(e);
 					}
@@ -22,7 +23,8 @@ public class DevCommand {
 				})
 			).then(literal("emitterCount")
 				.executes(context->{
-					System.out.println("Current Emitter Count: " + VeilRenderSystem.renderer().getParticleManager().getEmitterCount());
+					//System.out.println("Current Emitter Count: " + VeilRenderSystem.renderer().getParticleManager()
+					// .getEmitterCount());
 					return Command.SINGLE_SUCCESS;
 				})
 			)

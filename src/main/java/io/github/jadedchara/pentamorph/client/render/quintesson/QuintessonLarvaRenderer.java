@@ -25,7 +25,7 @@ public class QuintessonLarvaRenderer extends GeoEntityRenderer<QuintessonLarva>{
 	@Override
 	public void render(QuintessonLarva quintLarva, float entityYaw, float partialTick, MatrixStack poseStack,
 					   VertexConsumerProvider bufferSource, int packedLight){
-		super.renderLayers.addLayer(new AutoGlowingGeoLayer<>(this));
+		//super.renderLayers.addLayer(new AutoGlowingGeoLayer<>(this));
 		super.render(quintLarva, entityYaw, partialTick, poseStack, bufferSource, packedLight);
 
 	}

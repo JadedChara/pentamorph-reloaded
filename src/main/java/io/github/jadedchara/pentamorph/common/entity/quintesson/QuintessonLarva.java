@@ -6,6 +6,7 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.ChickenEntity;
@@ -13,10 +14,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 
@@ -26,8 +27,8 @@ public class QuintessonLarva extends PathAwareEntity implements GeoEntity {
 
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	@Override
-	protected void initDataTracker(){
-		super.initDataTracker();
+	protected void initDataTracker(DataTracker.Builder builder){
+		super.initDataTracker(builder);
 	}
 	@Override
 	protected void initGoals(){

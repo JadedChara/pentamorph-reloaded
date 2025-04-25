@@ -8,7 +8,7 @@ import software.bernie.geckolib.model.DefaultedItemGeoModel;
 
 public class NestCoreItem extends DefaultedItemGeoModel<NestCoreBlockEntity> {
 	public NestCoreItem() {
-		super(new Identifier(Pentamorph.MOD_ID,"nest_core"));
+		super(Identifier.of(Pentamorph.MOD_ID,"nest_core"));
 	}
 	@Override
 	public RenderLayer getRenderType(NestCoreBlockEntity animatable, Identifier texture) {

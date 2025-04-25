@@ -11,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClientPlayNetworkHandler.class)
+//@Mixin(ClientPlayNetworkHandler.class)
 public class ClientPlayMixin {
 	//@Shadow
 	//@Final
 	//private MinecraftClient client;
 
-	@Inject(at=@At("HEAD"),method="onGameJoin",cancellable = true)
+	//@Inject(at=@At("HEAD"),method="onGameJoin",cancellable = true)
 	private void gameJoin(GameJoinS2CPacket packet, CallbackInfo ci){
 		//this.client.player.setSneaking(true);
 		//this.client.player.setSneaking(false);

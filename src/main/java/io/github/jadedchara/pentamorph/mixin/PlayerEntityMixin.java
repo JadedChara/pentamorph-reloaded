@@ -6,10 +6,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import io.github.jadedchara.pentamorph.common.util.component.RPGComponent;
 import io.github.jadedchara.pentamorph.common.util.component.RPGComponentInitializer;
 import io.github.jadedchara.pentamorph.common.util.misc.HitboxAccess;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -27,11 +24,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements HitboxAc
 	@Shadow
 	public abstract boolean isSwimming();
 
-	@Shadow
-	protected abstract void initDataTracker();
-
-	@Shadow
-	public abstract EntityDimensions getDimensions(EntityPose pose);
+	//@Shadow
+	//protected abstract void initDataTracker();
 
 	@Inject(at=@At("HEAD"), method="initDataTracker",cancellable = true)
 	private void initData(CallbackInfo ci){
@@ -51,32 +45,75 @@ public abstract class PlayerEntityMixin extends LivingEntity implements HitboxAc
 
 	@Inject(at=@At("HEAD"), method="tick", cancellable = true)
 	private void dataTick(CallbackInfo ci){
+
 		try{
 			if(!this.rpgChar.equals(RPGComponent.getProvidedCharacter(this))){
 				this.rpgChar = RPGComponent.getProvidedCharacter(this);
 				this.tempEyeLevel = RPGComponent.getProvidedEyeHeight(this);
 				this.tempheight = RPGComponent.getProvidedHeight(this);
 				this.tempwidth = RPGComponent.getProvidedWidth(this);
-				this.tweaked_standing_dimensions = EntityDimensions.changing(this.tempwidth,this.tempheight);
+				this.tweaked_standing_dimensions =
+					EntityDimensions.changing(
+						this.tempwidth,
+						this.tempheight
+					).withEyeHeight(
+						this.tempEyeLevel
+					);
+
 				this.tweaked_pose_dimensions = ImmutableMap.builder()
-					.put(EntityPose.STANDING, this.tweaked_standing_dimensions)
-					.put(EntityPose.SLEEPING, SLEEPING_DIMENSIONS)
-					.put(EntityPose.FALL_FLYING, EntityDimensions.changing(this.tempwidth, this.tempwidth))
-					.put(EntityPose.SWIMMING, EntityDimensions.changing(this.tempwidth, this.tempwidth))
-					.put(EntityPose.SPIN_ATTACK, EntityDimensions.changing(this.tempwidth, this.tempwidth))
-					.put(EntityPose.CROUCHING, EntityDimensions.changing(this.tempwidth, (1.5F/1.8F)*this.tempheight))
-					.put(EntityPose.DYING, EntityDimensions.fixed(0.2F, 0.2F)).build();
+					.put(
+						EntityPose.STANDING,
+						this.tweaked_standing_dimensions
+					)
+					.put(
+						EntityPose.SLEEPING,
+						SLEEPING_DIMENSIONS
+					)
+					.put(
+						EntityPose.FALL_FLYING,
+						EntityDimensions.changing(
+							this.tempwidth,
+							this.tempwidth)
+					)
+					.put(
+						EntityPose.SWIMMING,
+						EntityDimensions.changing(
+							this.tempwidth,
+							this.tempwidth)
+					)
+					.put(
+						EntityPose.SPIN_ATTACK,
+						EntityDimensions.changing(
+							this.tempwidth,
+							this.tempwidth)
+					)
+					.put(
+						EntityPose.CROUCHING,
+						EntityDimensions.changing(
+							this.tempwidth,
+							(1.5F/1.8F)*this.tempheight
+						).withEyeHeight(
+							this.tempEyeLevel/1.62F
+						)
+					)
+					.put(
+						EntityPose.DYING,
+						EntityDimensions.fixed(
+							0.2F,
+							0.2F)
+					)
+					.build();
 				this.lastPose = this.getPose();
 				this.setPose(EntityPose.CROUCHING);
 				this.setPose(this.lastPose);
-				System.out.println(this.getClass() + " / " + Thread.currentThread().getName());
+				//System.out.println(this.getClass() + " / " + Thread.currentThread().getName());
 			}
 		}catch(NullPointerException ignore){
 		}
 		//this.updatePose();
 	}
 
-	@Inject(at = @At("HEAD"), method = "getDimensions", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "getDefaultDimensions", cancellable = true)
 	private void tweakDimensions(EntityPose pose, CallbackInfoReturnable<EntityDimensions> ci){
 		try{
 			//System.out.println(this.rpgChar + " / ("+this.getClass()+")");
@@ -91,12 +128,26 @@ public abstract class PlayerEntityMixin extends LivingEntity implements HitboxAc
 
 		}catch(NullPointerException err){
 			System.out.println("[Failed to Adjust Scaling]");
+			//this.getEyeHeight()
 		}
 
 	}
 
-	@Inject(at = @At("RETURN"), method= "getActiveEyeHeight",cancellable = true)
-	private void tweakActiveEyeHeight(EntityPose pose, EntityDimensions dimensions, CallbackInfoReturnable<Float> ci){
+
+
+
+	/*
+
+	Made invalid by 1.21's removal of getActiveEyeHeight, but the eye height is packed with dimensions now, so I can
+	switch it there!
+
+	*/
+
+
+
+	/*@Inject(at = @At("RETURN"), method= "getEyeHeight",cancellable = true)
+	void tweakActiveEyeHeight(EntityPose pose, CallbackInfoReturnable<Float> ci){
+		this.getEyeHeight()
 		try{
 			ci.setReturnValue((RPGComponent.getProvidedEyeHeight(this)/1.62F)*ci.getReturnValue());
 
@@ -104,6 +155,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements HitboxAc
 		}catch(NullPointerException err){
 			System.out.println("[Failed to adjust eye level]");
 		}
-	}
+	}*/
 
 }

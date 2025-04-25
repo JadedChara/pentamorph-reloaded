@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ChickenEntity.class)
-public class ChickenMixin extends AnimalEntity{
+public abstract class ChickenMixin extends AnimalEntity{
 	protected ChickenMixin(EntityType<? extends AnimalEntity> entityType, World world) {
 		super(entityType, world);
 	}

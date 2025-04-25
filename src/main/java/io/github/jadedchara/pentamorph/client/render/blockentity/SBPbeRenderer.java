@@ -31,7 +31,7 @@ import org.lwjgl.opengl.GL11C;
 import org.lwjgl.opengl.GL30C;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.NativeResource;
-import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
+//import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
 
 import java.io.IOException;
 import java.nio.IntBuffer;
@@ -51,9 +51,9 @@ public class SBPbeRenderer implements BlockEntityRenderer<SpaceBridgePortalBlock
 
 
 	public SBPbeRenderer(BlockEntityRendererFactory.Context context){
-		ClientPlayConnectionEvents.DISCONNECT.register(((handler, client) -> {
+		/*ClientPlayConnectionEvents.DISCONNECT.register(((handler, client) -> {
 			client.execute(this::free);
-		})); //VeilRenderer.getCullingFrustum().
+		}));*/ //VeilRenderer.getCullingFrustum().
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class SBPbeRenderer implements BlockEntityRenderer<SpaceBridgePortalBlock
 		//if(){
 		//return;
 		//}
-		VeilRenderSystem.setShader(new Identifier(Pentamorph.MOD_ID,"spacebridge"));
+		VeilRenderSystem.setShader(Identifier.of(Pentamorph.MOD_ID,"spacebridge"));
 		ShaderProgram.unbind();
 	}
 

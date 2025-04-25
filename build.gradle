@@ -3,10 +3,10 @@ plugins {
 	alias libs.plugins.quilt.loom
 }
 
-project.configurations.configureEach {
+/*project.configurations.configureEach {
 	exclude(group: "net.fabricmc", module: "fabric-loader")
 	exclude(group: "net.fabricmc.fabric-api")
-}
+}*/
 
 
 archivesBaseName = project.archives_base_name
@@ -47,26 +47,49 @@ dependencies {
 	}
 	*/
 	modImplementation libs.quilt.loader
-	modImplementation("foundry.veil:Veil-fabric-1.20.4:1.0.0.43") { transitive = false }
-	include ("foundry.veil:Veil-fabric-1.20.4:1.0.0.43") { transitive = false }
+	modImplementation("foundry.veil:veil-fabric-1.21.1:1.0.0.230") {
+		exclude(group: "net.fabricmc", module: "fabric-loader")
+		exclude(group: "net.fabricmc.fabric-api")
+		exclude group: "maven.modrinth"
+		exclude group: "me.fallenbreath"
+	}
+	include ("foundry.veil:veil-fabric-1.21.1:1.0.0.230") { transitive = true}
 
 
 
 
 	// QSL is not a complete API; You will need Quilted Fabric API to fill in the gaps.
 	// Quilted Fabric API will automatically pull in the correct QSL version.
-	modImplementation(libs.quilted.fabric.api) {
+	/*modImplementation(libs.quilted.fabric.api) {
 		exclude (group: "org.quiltmc.quilted-fabric-api", module: "fabric-gametest-api-v1")
+		//exclude (group: "net.fabricmc.fabric.api.networking")
+		exclude(group: "net.fabricmc", module: "fabric-loader")
+		exclude group: "org.quiltmc.qsl"
+	}*/
+	modImplementation ("net.fabricmc.fabric-api:fabric-api:0.115.4+1.21.1"){
+		exclude(group: "net.fabricmc", module: "fabric-loader")
+		exclude(group: "net.fabricmc.fabric.mixin.networking")
 	}
+
+
 	// modImplementation "org.quiltmc:qsl:qsl:3.0.0-beta.29+1.19.2"
-	modImplementation ('software.bernie.geckolib:geckolib-fabric-1.20.4:4.4.2'){
+	modImplementation ('software.bernie.geckolib:geckolib-fabric-1.21.1:4.7.5.1'){
 		exclude group: "net.fabricmc"
 		exclude group: "net.fabricmc.fabric-api"
+		exclude(group: "net.fabricmc", module: "fabric-loader")
 	}
 	// modImplementation libs.bundles.quilted.fabric.api // If you wish to use Fabric API's deprecated modules, you can replace the above line with this one
-	modImplementation ("dev.onyxstudios.cardinal-components-api:cardinal-components-api:5.4.0")
+	modImplementation ("org.ladysnake.cardinal-components-api:cardinal-components-api:6.1.2"){
+		exclude(group: "org.quiltmc", module: "qsl")
+		exclude(group: "net.fabricmc", module: "fabric-loader")
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 	//core library reference (unused, because quilted fabric does the thing)
-	modImplementation ("org.quiltmc:qsl:8.0.0-alpha.12+1.20.4")
+	modImplementation ("org.quiltmc:qsl:10.0.0-alpha.3+1.21.1"){
+		exclude(group: "net.fabricmc", module: "fabric-loader")
+		exclude(group: "net.fabricmc.fabric-api")
+
+	}
 }
 
 processResources {
@@ -80,13 +103,13 @@ processResources {
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = 'UTF-8'
 	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
 	// Still required by IDEs such as Eclipse and Visual Studio Code
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 
 	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task if it is present.
 	// If you remove this line, sources will not be generated.

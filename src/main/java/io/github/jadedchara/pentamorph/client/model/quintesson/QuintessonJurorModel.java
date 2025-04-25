@@ -9,15 +9,15 @@ import software.bernie.geckolib.model.GeoModel;
 
 
 public class QuintessonJurorModel extends GeoModel<QuintessonJuror> {
-	private static final Identifier MODEL = new Identifier(
+	private static final Identifier MODEL = Identifier.of(
 		Pentamorph.MOD_ID,
 		"geo/entity/quint/quintjuror.geo.json"
 	);
-	private static final Identifier ANIMATION = new Identifier(
+	private static final Identifier ANIMATION = Identifier.of(
 		Pentamorph.MOD_ID,
 		"animations/entity/quint/quintjuror.animation.json"
 	);
-	private static final Identifier TEXTURE = new Identifier(
+	private static final Identifier TEXTURE = Identifier.of(
 		Pentamorph.MOD_ID,
 		"textures/entity/quint/quintjuror.png"
 	);

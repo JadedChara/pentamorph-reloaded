@@ -9,9 +9,10 @@ import software.bernie.geckolib.model.GeoModel;
 
 
 public class QuintessonLarvaModel extends GeoModel<QuintessonLarva> {
-	private static final Identifier MODEL = new Identifier(Pentamorph.MOD_ID,"geo/entity/quint/quintlarva.geo.json");
-	private static final Identifier ANIMATION = new Identifier(Pentamorph.MOD_ID,"animations/entity/quint/quintlarva.animation.json");
-	private static final Identifier TEXTURE = new Identifier(Pentamorph.MOD_ID,"textures/entity/quint/quintlarva.png");
+	private static final Identifier MODEL = Identifier.of(Pentamorph.MOD_ID,"geo/entity/quint/quintlarva.geo.json");
+	private static final Identifier ANIMATION = Identifier.of(Pentamorph.MOD_ID,"animations/entity/quint/quintlarva" +
+		".animation.json");
+	private static final Identifier TEXTURE = Identifier.of(Pentamorph.MOD_ID,"textures/entity/quint/quintlarva.png");
 	@Override
 	public Identifier getModelResource(QuintessonLarva larva){
 		return MODEL;

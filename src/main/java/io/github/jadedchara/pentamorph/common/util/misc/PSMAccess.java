@@ -7,12 +7,12 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.List;
 
-//@Mixin(ParticleSystemManager.class)
+@Mixin(ParticleSystemManager.class)
 public interface PSMAccess {
 
-	void erase(ParticleEmitter emitter);
+	//void erase(ParticleEmitter emitter);
 
-	List<ParticleEmitter> getParticleEmitters();
+
 
 
 }

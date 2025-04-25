@@ -13,15 +13,15 @@ public class GeoReplacedPlayerModel extends GeoModel<GeoReplacedPlayer> {
 	public Identifier TEXTURE;
 	public Identifier ANIMATION;*/
 
-	public Identifier MODEL = new Identifier(
+	public Identifier MODEL = Identifier.of(
 			Pentamorph.MOD_ID,
 			"geo/entity/quint/quintlarva.geo.json"
 	);
-	public Identifier ANIMATION = new Identifier(
+	public Identifier ANIMATION = Identifier.of(
 			Pentamorph.MOD_ID,
 			"animations/entity/quint/quintlarva.animation.json"
 	);
-	public Identifier TEXTURE = new Identifier(
+	public Identifier TEXTURE = Identifier.of(
 			Pentamorph.MOD_ID,
 			"textures/entity/quint/quintlarva.png"
 	);
@@ -56,13 +56,13 @@ public class GeoReplacedPlayerModel extends GeoModel<GeoReplacedPlayer> {
 
 	//configuration resources
 	public void setModel(String character){
-		MODEL = new Identifier(Pentamorph.MOD_ID,"geo/entity/rpg/"+character+".geo.json");
+		MODEL = Identifier.of(Pentamorph.MOD_ID,"geo/entity/rpg/"+character+".geo.json");
 	}
 	public void setTexture(String character){
-		TEXTURE = new Identifier(Pentamorph.MOD_ID,"textures/entity/rpg"+character+".png");
+		TEXTURE = Identifier.of(Pentamorph.MOD_ID,"textures/entity/rpg"+character+".png");
 	}
 	public void setAnimation(String character){
-		ANIMATION = new Identifier(Pentamorph.MOD_ID,"animations/entity/rpg/"+character+".animation.json");
+		ANIMATION = Identifier.of(Pentamorph.MOD_ID,"animations/entity/rpg/"+character+".animation.json");
 	}
 	public GeoReplacedPlayerModel getInst(){
 		return this;

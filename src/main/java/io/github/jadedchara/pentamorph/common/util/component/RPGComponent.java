@@ -1,10 +1,11 @@
 package io.github.jadedchara.pentamorph.common.util.component;
 
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.HolderLookup;
 import org.jetbrains.annotations.Nullable;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.Map;
 
@@ -33,6 +34,7 @@ public class RPGComponent implements RPGEdit, AutoSyncedComponent {
 	public static String getProvidedCharacter(LivingEntity pr) {
 		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(pr).map(RPGComponent::getCurrentCharacter).orElse(
 				"human");
+
 	}
 	public static float getProvidedEyeHeight(LivingEntity pr){
 		return RPGComponentInitializer.RPG_COMPONENT.maybeGet(pr).map(RPGComponent::getEyeHeight).orElse(1.62F);
@@ -58,17 +60,20 @@ public class RPGComponent implements RPGEdit, AutoSyncedComponent {
 
 
 	@Override
-	public void readFromNbt(NbtCompound tag) {
+	public void readFromNbt(NbtCompound tag, HolderLookup.Provider p) {
 		this.cha = tag.getString("character");
 		this.eyeHeight = tag.getFloat("eyelevel");
 		this.standingHeight = tag.getFloat("standheight");
 		this.standingWidth = tag.getFloat("standwidth");
 	}
 	@Override
-	public void writeToNbt(NbtCompound tag) {
+	public void writeToNbt(NbtCompound tag,HolderLookup.Provider p) {
 		tag.putString("character",cha);
 		tag.putFloat("eyelevel",eyeHeight);
 		tag.putFloat("standheight",standingHeight);
 		tag.putFloat("standwidth",standingWidth);
 	}
+
+
+
 }

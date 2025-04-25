@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -20,9 +21,16 @@ import java.util.LinkedHashMap;
 
 public class QuintessonRegistry {
 	//preliminary stuff
+
 	public static final LinkedHashMap<EntityType<?>, Identifier> QUINTESSONS = new LinkedHashMap<>();
 	public static <T extends Entity> EntityType<T> generate(String name, EntityType<T> type){
-		QUINTESSONS.put(type, Pentamorph.id(name));
+		QUINTESSONS.put(
+			type,
+			Identifier.of(
+				Pentamorph.MOD_ID,
+				name
+			)
+		);
 		return type;
 	}
 	public static void init(){
@@ -31,26 +39,38 @@ public class QuintessonRegistry {
 		});
 		Item QUINT_LARVA_SPAWN_EGG = new SpawnEggItem(QUINTESSON_LARVA,0x757470,0x9C3436,
 				new QuiltItemSettings().maxCount(64));
-		Registry.register(Registries.ITEM,new Identifier(Pentamorph.MOD_ID, "quintesson_larva_spawn_egg"),
-				QUINT_LARVA_SPAWN_EGG);
+		Registry.register(
+			Registries.ITEM,
+			Identifier.of(
+				Pentamorph.MOD_ID,
+				"quintesson_larva_spawn_egg"
+			),
+			QUINT_LARVA_SPAWN_EGG
+		);
 
 		ItemGroup QUINTESSON_SET = FabricItemGroup.builder()
-				.name(Text.of("Quintessons"))
+				.name(Text.of("Pentamorph Creatures"))
 				.icon(()->new ItemStack(QUINT_LARVA_SPAWN_EGG))
 				.entries((params, col)->{
 					col.addItem(QUINT_LARVA_SPAWN_EGG);
 				})
 				.build();
-		Registry.register(Registries.ITEM_GROUP, QUINTESSON_SET_KEY, QUINTESSON_SET);
+		Registry.register(Registries.ITEM_GROUP, "pentamorph:pentamorph_creatures", QUINTESSON_SET);
 	}
 	public static final RegistryKey<ItemGroup> QUINTESSON_SET_KEY = RegistryKey.of(RegistryKeys.ITEM_GROUP,
-			new Identifier(Pentamorph.MOD_ID, "quintessons"));
+		Identifier.of(Pentamorph.MOD_ID, "quintessons"));
 
 
 	//Entities
 	public static final EntityType<QuintessonLarva> QUINTESSON_LARVA = generate("quintesson_larva",
-			QuiltEntityTypeBuilder.createMob().entityFactory(QuintessonLarva::new).defaultAttributes(QuintessonLarva
-			.createAttributes()).setDimensions(EntityDimensions.changing(0.5f,0.3f)).build());
+
+			QuiltEntityTypeBuilder
+				.create(SpawnGroup.MISC, QuintessonLarva::new)
+				//.setEyeHeight(0.47f)
+				.setDimensions(EntityDimensions.changing(0.5f,0.3f))
+				.makeFireImmune()
+				//.maxTrackingRange(50)
+				.build());
 	/*public static final EntityType<QuintessonJuror> QUINTESSON_JUROR = generate("quintesson_juror",
 			QuiltEntityTypeBuilder.createMob().entityFactory(QuintessonJuror::new).defaultAttributes(QuintessonJuror
 					.createAttributes()).setDimensions(EntityDimensions.changing(0.5f,0.3f)).build());*/

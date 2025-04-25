@@ -9,7 +9,7 @@ import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 public class NestCoreModel extends DefaultedBlockGeoModel<NestCoreBlockEntity> {
 
 	public NestCoreModel() {
-		super(new Identifier(Pentamorph.MOD_ID,"nest_core"));
+		super(Identifier.of(Pentamorph.MOD_ID,"nest_core"));
 
 	}
 	@Override
